@@ -5,7 +5,7 @@ env:
 on:
   push:
     branches:
-      - mainy
+      - main
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
@@ -16,7 +16,18 @@ jobs:
             echo "You must provide an VERCEL_TOKEN secret"
             exit 1
           fi
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: build
+        run: pnpm run build
+      
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
