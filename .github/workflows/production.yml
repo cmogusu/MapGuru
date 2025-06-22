@@ -24,10 +24,11 @@ jobs:
           node-version: "20"
           cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install
-      - name: build
-        run: pnpm run build
-      
+        shell: bash
+        run: |
+          npm install -g pnpm
+          pnpm install
+          pnpm run build
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
