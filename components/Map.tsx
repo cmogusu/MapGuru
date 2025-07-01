@@ -1,7 +1,7 @@
 "use client";
 
 import { MapLibreMap } from "@mapcomponents/react-maplibre";
-import { ThreeJsLayer } from "./ThreeJsLayer";
+import { ThreeJsLayer } from "./MLThreeJsLayer";
 
 export function MapWithAnimation() {
 	const mapId = "mapId";
@@ -12,7 +12,7 @@ export function MapWithAnimation() {
 				mapId={mapId}
 				options={{
 					style: "https://wms.wheregroup.com/tileserver/style/osm-bright.json",
-					center: [7.099771581806502, 50.73395746209983],
+					center: [7.099771581806502, 45.73395746209983],
 					pitch: 45,
 					zoom: 10,
 				}}

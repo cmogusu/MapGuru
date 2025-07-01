@@ -1,12 +1,5 @@
-"use client";
-
-import { MapComponentsProvider } from "@mapcomponents/react-maplibre";
-import { MapWithAnimation } from "../components/Map";
+import App from "../components/App";
 
 export default function Home() {
-	return (
-		<MapComponentsProvider>
-			<MapWithAnimation />
-		</MapComponentsProvider>
-	);
+	return <App />;
 }
