@@ -12,7 +12,9 @@ export function MapWithAnimation() {
 				mapId={mapId}
 				options={{
 					style: "https://wms.wheregroup.com/tileserver/style/osm-bright.json",
-					zoom: 4,
+					center: [7.099771581806502, 50.73395746209983],
+					pitch: 45,
+					zoom: 10,
 				}}
 				style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
 			/>
