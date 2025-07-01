@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cagiva v593
+* source:	https://sketchfab.com/3d-models/cagiva-v593-c700e7c131454303b3a87d7a264e7252
+* author:	Yudha Mfr (https://sketchfab.com/yudhamfr)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cagiva v593" (https://sketchfab.com/3d-models/cagiva-v593-c700e7c131454303b3a87d7a264e7252) by Yudha Mfr (https://sketchfab.com/yudhamfr) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
