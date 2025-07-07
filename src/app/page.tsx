@@ -1,5 +1,10 @@
-import App from "../components/MapLibre/App";
+import { App } from "../pages/Hello";
 
 export default function Home() {
-	return <App />;
+	return (
+		<main>
+			<header>Hellow</header>
+			<App />
+		</main>
+	);
 }
