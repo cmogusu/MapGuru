@@ -1,22 +1,22 @@
-import { pxToRem } from '~/utils/style';
+import { pxToRem } from "@/utils/style";
 
 // Full list of tokens
 const baseTokens = {
-  black: 'oklch(0% 0 0)',
-  white: 'oklch(100% 0 0)',
-  bezierFastoutSlowin: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
-  durationXS: '200ms',
-  durationS: '300ms',
-  durationM: '400ms',
-  durationL: '600ms',
-  durationXL: '800ms',
+  black: "oklch(0% 0 0)",
+  white: "oklch(100% 0 0)",
+  bezierFastoutSlowin: "cubic-bezier(0.4, 0.0, 0.2, 1)",
+  durationXS: "200ms",
+  durationS: "300ms",
+  durationM: "400ms",
+  durationL: "600ms",
+  durationXL: "800ms",
   systemFontStack:
-    'system-ui, -apple-system, BlinkMacSystemFont, San Francisco, Roboto, Segoe UI, Ubuntu, Helvetica Neue, sans-serif',
+    "system-ui, -apple-system, BlinkMacSystemFont, San Francisco, Roboto, Segoe UI, Ubuntu, Helvetica Neue, sans-serif",
   fontStack: `Gotham, var(--systemFontStack)`,
   monoFontStack:
-    'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
+    "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
   japaneseFontStack:
-    'IPA Gothic, ヒラギノ角ゴ Pro W3, Hiragino Kaku Gothic Pro, Hiragino Sans, Osaka, メイリオ, Meiryo, Segoe UI, sans-serif',
+    "IPA Gothic, ヒラギノ角ゴ Pro W3, Hiragino Kaku Gothic Pro, Hiragino Sans, Osaka, メイリオ, Meiryo, Segoe UI, sans-serif",
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightBold: 700,
@@ -31,22 +31,22 @@ const baseTokens = {
   fontSizeBodyM: pxToRem(18),
   fontSizeBodyS: pxToRem(16),
   fontSizeBodyXS: pxToRem(14),
-  lineHeightTitle: '1.1',
-  lineHeightBody: '1.6',
-  maxWidthS: '540px',
-  maxWidthM: '720px',
-  maxWidthL: '1096px',
-  maxWidthXL: '1680px',
-  spaceOuter: '64px',
-  spaceXS: '4px',
-  spaceS: '8px',
-  spaceM: '16px',
-  spaceL: '24px',
-  spaceXL: '32px',
-  space2XL: '48px',
-  space3XL: '64px',
-  space4XL: '96px',
-  space5XL: '128px',
+  lineHeightTitle: "1.1",
+  lineHeightBody: "1.6",
+  maxWidthS: "540px",
+  maxWidthM: "720px",
+  maxWidthL: "1096px",
+  maxWidthXL: "1680px",
+  spaceOuter: "64px",
+  spaceXS: "4px",
+  spaceS: "8px",
+  spaceM: "16px",
+  spaceL: "24px",
+  spaceXL: "32px",
+  space2XL: "48px",
+  space3XL: "64px",
+  space4XL: "96px",
+  space5XL: "128px",
   zIndex0: 0,
   zIndex1: 4,
   zIndex2: 8,
@@ -62,11 +62,11 @@ const tokensDesktop = {
 };
 
 const tokensLaptop = {
-  maxWidthS: '480px',
-  maxWidthM: '640px',
-  maxWidthL: '1000px',
-  maxWidthXL: '1100px',
-  spaceOuter: '48px',
+  maxWidthS: "480px",
+  maxWidthM: "640px",
+  maxWidthL: "1000px",
+  maxWidthXL: "1100px",
+  spaceOuter: "48px",
   fontSizeH0: pxToRem(100),
   fontSizeH1: pxToRem(70),
   fontSizeH2: pxToRem(50),
@@ -85,7 +85,7 @@ const tokensTablet = {
 };
 
 const tokensMobile = {
-  spaceOuter: '24px',
+  spaceOuter: "24px",
   fontSizeH0: pxToRem(56),
   fontSizeH1: pxToRem(40),
   fontSizeH2: pxToRem(34),
@@ -98,7 +98,7 @@ const tokensMobile = {
 };
 
 const tokensMobileSmall = {
-  spaceOuter: '16px',
+  spaceOuter: "16px",
   fontSizeH0: pxToRem(42),
   fontSizeH1: pxToRem(38),
   fontSizeH2: pxToRem(28),
@@ -108,27 +108,27 @@ const tokensMobileSmall = {
 
 // Tokens that change based on theme
 const dark = {
-  background: 'oklch(17.76% 0 0)',
-  backgroundLight: 'oklch(21.78% 0 0)',
-  primary: 'oklch(84.42% 0.19 202.24)',
-  accent: 'oklch(84.42% 0.19 202.24)',
-  error: 'oklch(65.91% 0.249 13.76)',
-  text: 'var(--white)',
-  textTitle: 'var(--text)',
-  textBody: 'color-mix(in lab, var(--text) 80%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 60%, transparent)',
+  background: "oklch(17.76% 0 0)",
+  backgroundLight: "oklch(21.78% 0 0)",
+  primary: "oklch(84.42% 0.19 202.24)",
+  accent: "oklch(84.42% 0.19 202.24)",
+  error: "oklch(65.91% 0.249 13.76)",
+  text: "var(--white)",
+  textTitle: "var(--text)",
+  textBody: "color-mix(in lab, var(--text) 80%, transparent)",
+  textLight: "color-mix(in lab, var(--text) 60%, transparent)",
 };
 
 const light = {
-  background: 'oklch(96.12% 0 0)',
-  backgroundLight: 'var(--white)',
-  primary: 'var(--black)',
-  accent: 'oklch(84.42% 0.19 202.24)',
-  error: 'oklch(63.17% 0.259 25.41)',
-  text: 'var(--black)',
-  textTitle: 'color-mix(in lab, var(--text) 90%, transparent)',
-  textBody: 'color-mix(in lab, var(--text) 75%, transparent)',
-  textLight: 'color-mix(in lab, var(--text) 55%, transparent)',
+  background: "oklch(96.12% 0 0)",
+  backgroundLight: "var(--white)",
+  primary: "var(--black)",
+  accent: "oklch(84.42% 0.19 202.24)",
+  error: "oklch(63.17% 0.259 25.41)",
+  text: "var(--black)",
+  textTitle: "color-mix(in lab, var(--text) 90%, transparent)",
+  textBody: "color-mix(in lab, var(--text) 75%, transparent)",
+  textLight: "color-mix(in lab, var(--text) 55%, transparent)",
 };
 
 export const tokens = {

@@ -1,38 +1,38 @@
-import config from '~/config.json';
+import config from "@/config.json";
 
 export const navLinks = [
   {
-    label: 'Projects',
-    pathname: '/#project-1',
+    label: "Projects",
+    pathname: "/#project-1",
   },
   {
-    label: 'Details',
-    pathname: '/#details',
+    label: "Details",
+    pathname: "/#details",
   },
   {
-    label: 'Articles',
-    pathname: '/articles',
+    label: "Articles",
+    pathname: "/articles",
   },
   {
-    label: 'Contact',
-    pathname: '/contact',
+    label: "Contact",
+    pathname: "/contact",
   },
 ];
 
 export const socialLinks = [
   {
-    label: 'Bluesky',
+    label: "Bluesky",
     url: `https://bsky.app/profile/${config.bluesky}`,
-    icon: 'bluesky',
+    icon: "bluesky",
   },
   {
-    label: 'Figma',
+    label: "Figma",
     url: `https://www.figma.com/${config.figma}`,
-    icon: 'figma',
+    icon: "figma",
   },
   {
-    label: 'Github',
+    label: "Github",
     url: `https://github.com/${config.github}`,
-    icon: 'github',
+    icon: "github",
   },
 ];

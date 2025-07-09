@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { classes } from "~/utils/style";
+import { classes } from "@/utils/style";
 import styles from "./monogram.module.css";
 
 export const Monogram = ({ highlight, className, ref, ...props }) => {
