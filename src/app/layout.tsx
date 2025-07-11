@@ -34,6 +34,11 @@ const navigation: Navigation = [
 		title: "Main items",
 	},
 	{
+		segment: "maps",
+		title: "Maps",
+		icon: <BarChartIcon />,
+	},
+	{
 		segment: "mapbox",
 		title: "Mapbox",
 		icon: <DashboardIcon />,
@@ -88,8 +93,8 @@ const branding: Branding = {
 		<Image
 			src="/mapguru-small-logo.png"
 			alt="MapGuru Logo"
-			width={200}
-			height={50}
+			width={75}
+			height={20}
 		/>
 	),
 	title: "The maps experts",
