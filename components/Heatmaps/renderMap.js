@@ -4,7 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 export function renderMap(container, setZoom) {
   const map = new MapLibre({
     container,
-    zoom: 8,
+    zoom: 10,
     center: [144.9415469, -37.80477682],
     style:
       "https://api.maptiler.com/maps/backdrop/style.json?key=BgDl6LfLj7t7bRlYpA9b",
@@ -43,8 +43,8 @@ function updateZoom(map, setZoom) {
 function addDevelopmentData(map, firstSymbolId) {
   map.addSource("street-addresses-source", {
     type: "geojson",
-    // data: "https://clived.live/street-addresses.geojson",
-    data: "/development-activity-monitor.geojson",
+    data: "https://clived.live/street-addresses.geojson",
+    // data: "/development-activity-monitor.geojson",
     cluster: true,
     clusterMaxZoom: 14,
     clusterRadius: 50,
