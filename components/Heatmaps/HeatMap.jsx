@@ -38,11 +38,12 @@ export default function HeatMap({ mapTilerApiKey }) {
 					<a href="https://clived.live/street-addresses.geojson">
 						this GeoJson file
 					</a>{" "}
-					that is approximately 30MB. It contains data on street light in
-					Melbourne Australia loaded from{" "}
+					that is approximately 30MB in size and contains 106,037 records. The
+					records show the locations of street lights in the city of Melbourne
+					in Australia. <br /> You can view the data{" "}
 					<a href="https://data.melbourne.vic.gov.au/explore/dataset/street-lights-with-emitted-lux-level-council-owned-lights-only/information/">
 						{" "}
-						this dataset
+						here
 					</a>
 				</p>
 				<p>{isLoading && <span className="loading">loading...</span>}</p>
