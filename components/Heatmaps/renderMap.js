@@ -9,7 +9,8 @@ export function renderMap(container, width, height, mapTilerApiKey) {
     container,
     zoom: 12,
     center: [144.9415469, -37.80477682],
-    style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${mapTilerApiKey || "BgDl6LfLj7t7bRlYpA9b"}`,
+    style:
+      "https://api.maptiler.com/maps/backdrop/style.json?key=BgDl6LfLj7t7bRlYpA9b",
     pitch: 0,
     maxZoom: 18,
     maxPitch: 85,
@@ -22,7 +23,7 @@ export function renderMap(container, width, height, mapTilerApiKey) {
       visualizePitch: true,
       visualizeRoll: true,
     }),
-    "top-right"
+    "top-left"
   );
 
   map.on("load", () => {
@@ -122,12 +123,61 @@ export function renderMap(container, width, height, mapTilerApiKey) {
         filter: ["has", "point_count"],
         layout: {
           "text-field": "{point_count_abbreviated}",
-          "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-          "text-size": 12,
+          "text-font": ["Arial Unicode MS Bold"],
+          "text-size": 8,
         },
       },
       firstSymbolId
     );
+
+    // map.addLayer(
+    //   {
+    //     id: "heatmaps",
+    //     type: "heatmap",
+    //     source: "development-activity-source",
+    //     maxzoom: 9,
+    //     paint: {
+    //       "heatmap-weight": [
+    //         "interpolate",
+    //         ["linear"],
+    //         ["get", "point_count"],
+    //         0,
+    //         0,
+    //         6,
+    //         1,
+    //       ],
+    //       "heatmap-intensity": [
+    //         "interpolate",
+    //         ["linear"],
+    //         ["zoom"],
+    //         0,
+    //         1,
+    //         9,
+    //         3,
+    //       ],
+    //       "heatmap-color": [
+    //         "interpolate",
+    //         ["linear"],
+    //         ["heatmap-density"],
+    //         0,
+    //         "rgba(33,102,172,0)",
+    //         0.2,
+    //         "rgb(103,169,207)",
+    //         0.4,
+    //         "rgb(209,229,240)",
+    //         0.6,
+    //         "rgb(253,219,199)",
+    //         0.8,
+    //         "rgb(239,138,98)",
+    //         1,
+    //         "rgb(178,24,43)",
+    //       ],
+    //       "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 0, 2, 9, 20],
+    //       "heatmap-opacity": ["interpolate", ["linear"], ["zoom"], 7, 1, 9, 0],
+    //     },
+    //   },
+    //   firstSymbolId
+    // );
   });
 }
 
