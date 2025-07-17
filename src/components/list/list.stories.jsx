@@ -3,7 +3,7 @@ import { StoryContainer } from "../../../.storybook/story-container";
 import { ListItem } from "./list";
 
 export default {
-	title: "List",
+	title: "Lists",
 };
 
 const Story = (args) => {
