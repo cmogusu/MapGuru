@@ -19,7 +19,7 @@
 			}
 		],
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./*"]
 		}
 	},
 	"include": [
@@ -27,7 +27,7 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/components/ThreeJsLayer.jsx"
+		"components/ThreeJsLayer.jsx"
 	],
 	"exclude": ["node_modules"]
 }
