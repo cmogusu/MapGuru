@@ -1,11 +1,11 @@
-import { Map as MapLibre, NavigationControl } from "maplibre-gl";
+import { Map as MapLibre, NavigationControl, FullscreenControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 export function renderMap(container, setZoom) {
   const map = new MapLibre({
     container,
-    zoom: 10,
-    center: [144.9415469, -37.80477682],
+    zoom: 15.5,
+    center: [144.96177471761524, -37.81467349847328],
     style:
       "https://api.maptiler.com/maps/backdrop/style.json?key=BgDl6LfLj7t7bRlYpA9b",
     pitch: 0,
@@ -13,6 +13,7 @@ export function renderMap(container, setZoom) {
     maxPitch: 85,
   });
 
+  map.addControl(new FullscreenControl(), "top-left");
   map.addControl(
     new NavigationControl({
       showCompass: true,
@@ -27,6 +28,13 @@ export function renderMap(container, setZoom) {
     const firstSymbolId = getFirstSymbol(map);
     addDevelopmentData(map, firstSymbolId);
 
+    onSourceLoad(map, 'street-addresses-source')
+      .then(() => {
+        setTimeout(() => {
+          map.zoomTo(7, {duration: 10000});
+        }, 2000)
+      })
+
     updateZoom(map, setZoom)
   });
 
@@ -35,12 +43,28 @@ export function renderMap(container, setZoom) {
   })
 }
 
+const onSourceLoad = (map, targetSourceId) =>
+  new Promise((resolve) => {
+    const loadingCheck = (event)=> {
+      const { isSourceLoaded, sourceId } = event
+      console.log({ isSourceLoaded, sourceId, targetSourceId })
+      if (isSourceLoaded && sourceId === targetSourceId) {
+        map.off('sourcedata', loadingCheck)
+        resolve()
+      }
+    }
+
+    map.on('sourcedata', loadingCheck)
+  })
+
 function updateZoom(map, setZoom) {
   const zoom = map.getZoom()
   setZoom(zoom.toFixed(2))
 }
 
 function addDevelopmentData(map, firstSymbolId) {
+  
+
   map.addSource("street-addresses-source", {
     type: "geojson",
     data: "https://clived.live/street-addresses.geojson",
@@ -60,10 +84,8 @@ function addDevelopmentData(map, firstSymbolId) {
         'interpolate',
         ['linear'],
         ['get', 'mag'],
-        0,
-        0,
-        10,
-        1
+        0, 0,
+        10, 1
       ],
       'heatmap-radius': [
         'interpolate',
@@ -78,38 +100,27 @@ function addDevelopmentData(map, firstSymbolId) {
         'interpolate',
         ['linear'],
         ['zoom'],
-        0,
-        0,
-        8,
-        1,
-        12,
-        0,
+        0, 0,
+        8, 1,
+        12, 0,
       ],
       'heatmap-intensity': [
         'interpolate',
         ['linear'],
         ['zoom'],
-        0,
-        1,
-        12,
-        4
+        0, 1,
+        12, 4
       ],
       'heatmap-color': [
         'interpolate',
         ['linear'],
         ['heatmap-density'],
-        0,
-        'rgba(33,102,172,0)',
-        0.2,
-        'rgb(103,169,207)',
-        0.4,
-        'rgb(209,229,240)',
-        0.6,
-        'rgb(253,219,199)',
-        0.8,
-        'rgb(239,138,98)',
-        1,
-        'rgb(178,24,43)'
+        0, 'rgba(33,102,172,0)',
+        0.2, 'rgb(103,169,207)',
+        0.4, 'rgb(209,229,240)',
+        0.6, 'rgb(253,219,199)',
+        0.8, 'rgb(239,138,98)',
+        1, 'rgb(178,24,43)'
       ]
     }
   }, firstSymbolId)
@@ -124,16 +135,11 @@ function addDevelopmentData(map, firstSymbolId) {
           "interpolate",
           ["linear"],
           ["zoom"],
-          4,
-          1,
-          6,
-          1.5,
-          8,
-          2,
-          12,
-          2.5,
-          16,
-          5,
+          4, 1,
+          6, 1.5,
+          8, 2,
+          12, 2.5,
+          16, 5,
         ],
         "circle-opacity": 0.8,
         "circle-color": "#51bbd6",
@@ -165,10 +171,8 @@ function addDevelopmentData(map, firstSymbolId) {
           'interpolate',
             ['linear'],
             ['zoom'],
-            9,
-            0,
-            10,
-            1
+            9, 0,
+            10, 1
         ],
         "circle-radius": ["step", ["get", "point_count"], 10, 50, 15, 500, 25],
       },
@@ -186,6 +190,7 @@ function addDevelopmentData(map, firstSymbolId) {
       layout: {
         "text-field": "{point_count_abbreviated}",
         "text-font": ["Arial Unicode MS Bold"],
+        'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
         "text-size": 8,
       },
       minzoom: 9,
@@ -240,3 +245,13 @@ function getFirstSymbol(map) {
 
   return firstSymbolId;
 }
+
+// function checkSourceIsLoaded(source) {
+//   let limit = 1000
+//   const intervalId = setInterval(() => {
+//     if (limit-- < 1) {
+//       map.isSourceLoaded(source)
+//       clearInterval(intervalId)
+//     }
+//   }, 100)
+// }
