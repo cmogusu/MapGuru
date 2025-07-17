@@ -1,13 +1,10 @@
 import { Map as MapLibre, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-export function renderMap(container, width, height) {
-  container.style.width = `${width}px`;
-  container.style.height = `${height}px`;
-
+export function renderMap(container, setZoom) {
   const map = new MapLibre({
     container,
-    zoom: 12,
+    zoom: 8,
     center: [144.9415469, -37.80477682],
     style:
       "https://api.maptiler.com/maps/backdrop/style.json?key=BgDl6LfLj7t7bRlYpA9b",
@@ -29,17 +26,93 @@ export function renderMap(container, width, height) {
   map.on("load", () => {
     const firstSymbolId = getFirstSymbol(map);
     addDevelopmentData(map, firstSymbolId);
+
+    updateZoom(map, setZoom)
   });
+
+  map.on('zoom', () => {
+    updateZoom(map, setZoom)
+  })
+}
+
+function updateZoom(map, setZoom) {
+  const zoom = map.getZoom()
+  setZoom(zoom.toFixed(2))
 }
 
 function addDevelopmentData(map, firstSymbolId) {
   map.addSource("street-addresses-source", {
     type: "geojson",
-    data: "https://clived.live/street-addresses.geojson",
+    // data: "https://clived.live/street-addresses.geojson",
+    data: "/development-activity-monitor.geojson",
     cluster: true,
     clusterMaxZoom: 14,
     clusterRadius: 50,
   });
+
+  map.addLayer({
+    id: 'heatmap',
+    type: 'heatmap',
+    source: 'street-addresses-source',
+    maxzoom: 13,
+    paint: {
+      'heatmap-weight': [
+        'interpolate',
+        ['linear'],
+        ['get', 'mag'],
+        0,
+        0,
+        10,
+        1
+      ],
+      'heatmap-radius': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        0,
+        1,
+        12,
+        80
+      ],
+      'heatmap-opacity': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        0,
+        0,
+        8,
+        1,
+        12,
+        0,
+      ],
+      'heatmap-intensity': [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        0,
+        1,
+        12,
+        4
+      ],
+      'heatmap-color': [
+        'interpolate',
+        ['linear'],
+        ['heatmap-density'],
+        0,
+        'rgba(33,102,172,0)',
+        0.2,
+        'rgb(103,169,207)',
+        0.4,
+        'rgb(209,229,240)',
+        0.6,
+        'rgb(253,219,199)',
+        0.8,
+        'rgb(239,138,98)',
+        1,
+        'rgb(178,24,43)'
+      ]
+    }
+  }, firstSymbolId)
 
   map.addLayer(
     {
@@ -88,8 +161,18 @@ function addDevelopmentData(map, firstSymbolId) {
           750,
           "#f28cb1",
         ],
-        "circle-radius": ["step", ["get", "point_count"], 10, 50, 20, 750, 30],
+        "circle-opacity": [
+          'interpolate',
+            ['linear'],
+            ['zoom'],
+            9,
+            0,
+            10,
+            1
+        ],
+        "circle-radius": ["step", ["get", "point_count"], 10, 50, 15, 500, 25],
       },
+      minzoom: 9,
     },
     firstSymbolId
   );
@@ -105,9 +188,43 @@ function addDevelopmentData(map, firstSymbolId) {
         "text-font": ["Arial Unicode MS Bold"],
         "text-size": 8,
       },
+      minzoom: 9,
     },
     firstSymbolId
   );
+
+  map.addLayer({
+    id: 'unclustered-point',
+    type: 'circle',
+    source: "street-addresses-source",
+    filter: ['!', ['has', 'point_count']],
+    paint: {
+      'circle-color': '#11b4da',
+      'circle-radius': 4,
+      'circle-stroke-width': 1,
+      'circle-stroke-color': '#fff'
+    }
+  });
+
+  map.on('click', 'clusters', async (e) => {
+      const features = map.queryRenderedFeatures(e.point, {
+          layers: ['clusters']
+      });
+      const clusterId = features[0].properties.cluster_id;
+      const zoom = await map.getSource('street-addresses-source').getClusterExpansionZoom(clusterId);
+      map.easeTo({
+          center: features[0].geometry.coordinates,
+          zoom
+      });
+  });
+
+  map.on('mouseenter', 'clusters', () => {
+      map.getCanvas().style.cursor = 'pointer';
+  });
+
+  map.on('mouseleave', 'clusters', () => {
+      map.getCanvas().style.cursor = '';
+  });
 }
 
 function getFirstSymbol(map) {
