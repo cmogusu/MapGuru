@@ -1,5 +1,6 @@
 import App from "../components/Heatmaps/App";
 import Image from "next/image";
+import logoImg from "./mapguru-small-logo.png";
 
 export default function Home() {
 	const { MAPTILER_API_KEY } = process.env;
@@ -22,12 +23,7 @@ export default function Home() {
 							<span className="icon-bar"></span>
 						</button>
 						<a className="navbar-brand" href="/">
-							<Image
-								src="/mapguru-small-logo.png"
-								alt="MapGuru logo"
-								height={20}
-								width={70}
-							/>
+							<Image src={logoImg} alt="MapGuru logo" height={20} width={70} />
 						</a>
 					</div>
 					<div className="collapse navbar-collapse">

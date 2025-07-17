@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { renderMap } from "./renderMap";
 import "./style.css";
 
-export default function HeatMap({ mapTilerApiKey }) {
+export default function HeatMap() {
 	const divRef = useRef();
 	const [isLoading, setIsLoading] = useState(true);
 	const [zoom, setZoom] = useState("");
