@@ -1,0 +1,9 @@
+.map-container {
+	margin-bottom: 50px;
+	position: "relative";
+}
+
+.map-container > div {
+	margin-left: auto;
+	margin-right: auto;
+}

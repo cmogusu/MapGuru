@@ -1,10 +1,11 @@
 import App from "../components/Heatmaps/App";
+import Image from "next/image";
 
 export default function Home() {
 	const { MAPTILER_API_KEY } = process.env;
 	return (
 		<main>
-			<nav className="navbar navbar-inverse navbar-fixed-top">
+			<nav className="navbar navbar-inverse">
 				<div className="container">
 					<div className="navbar-header">
 						<button
@@ -21,7 +22,12 @@ export default function Home() {
 							<span className="icon-bar"></span>
 						</button>
 						<a className="navbar-brand" href="/">
-							MapGuru
+							<Image
+								src="/mapguru-small-logo.png"
+								alt="MapGuru logo"
+								height={20}
+								width={70}
+							/>
 						</a>
 					</div>
 					<div className="collapse navbar-collapse">
@@ -39,21 +45,7 @@ export default function Home() {
 					</div>
 				</div>
 			</nav>
-			<div className="container">
-				<p className="lead">
-					This map is loading and rendering{" "}
-					<a href="https://clived.live/street-addresses.geojson">
-						this GeoJson file
-					</a>{" "}
-					that is approximately 30MB. It contains data on street light in
-					Melbourne Australia loaded from{" "}
-					<a href="https://data.melbourne.vic.gov.au/explore/dataset/street-lights-with-emitted-lux-level-council-owned-lights-only/information/">
-						{" "}
-						this dataset
-					</a>
-				</p>
-				<App mapTilerApiKey={MAPTILER_API_KEY} />
-			</div>
+			<App mapTilerApiKey={MAPTILER_API_KEY} />
 		</main>
 	);
 }

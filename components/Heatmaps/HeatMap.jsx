@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { renderMap } from "./renderMap";
+import "./style.css";
 
 export default function HeatMap({ mapTilerApiKey }) {
 	const divRef = useRef();
@@ -15,8 +16,24 @@ export default function HeatMap({ mapTilerApiKey }) {
 	}, [mapTilerApiKey]);
 
 	return (
-		<div style={{ position: "relative" }}>
-			<div ref={divRef} />
+		<div>
+			<div className="container">
+				<p className="lead">
+					This map is loading and rendering{" "}
+					<a href="https://clived.live/street-addresses.geojson">
+						this GeoJson file
+					</a>{" "}
+					that is approximately 30MB. It contains data on street light in
+					Melbourne Australia loaded from{" "}
+					<a href="https://data.melbourne.vic.gov.au/explore/dataset/street-lights-with-emitted-lux-level-council-owned-lights-only/information/">
+						{" "}
+						this dataset
+					</a>
+				</p>
+			</div>
+			<div className="map-container">
+				<div ref={divRef} />
+			</div>
 		</div>
 	);
 }

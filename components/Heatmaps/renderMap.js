@@ -1,7 +1,7 @@
 import { Map as MapLibre, NavigationControl } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-export function renderMap(container, width, height, mapTilerApiKey) {
+export function renderMap(container, width, height) {
   container.style.width = `${width}px`;
   container.style.height = `${height}px`;
 
@@ -28,7 +28,6 @@ export function renderMap(container, width, height, mapTilerApiKey) {
 
   map.on("load", () => {
     const firstSymbolId = getFirstSymbol(map);
-
     addDevelopmentData(map, firstSymbolId);
   });
 }
