@@ -9,7 +9,7 @@ export function renderMap(container, width, height, mapTilerApiKey) {
     container,
     zoom: 12,
     center: [144.9415469, -37.80477682],
-    style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${mapTilerApiKey}`,
+    style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${mapTilerApiKey || "BgDl6LfLj7t7bRlYpA9b"}`,
     pitch: 0,
     maxZoom: 18,
     maxPitch: 85,
