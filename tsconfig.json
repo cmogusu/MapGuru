@@ -27,7 +27,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"components/ThreeJsLayer.jsx"
+		"components/ThreeJsLayer.jsx",
+		"components/Heatmaps/App.jsx"
 	],
 	"exclude": ["node_modules"]
 }

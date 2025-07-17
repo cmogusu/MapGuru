@@ -1,5 +1,6 @@
-import App from "../components/App";
+import App from "../components/Heatmaps/App";
 
 export default function Home() {
-	return <App />;
+	const { MAPTILER_API_KEY } = process.env;
+	return <App mapTilerApiKey={MAPTILER_API_KEY} />;
 }
