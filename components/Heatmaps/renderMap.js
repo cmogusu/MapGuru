@@ -28,7 +28,7 @@ export function renderMap(container, width, height, mapTilerApiKey) {
   map.on("load", () => {
     map.addSource("development-activity-source", {
       type: "geojson",
-      data: "/development-activity-monitor.geojson",
+      data: "https://clived.live/development-activity-monitor.geojson",
     });
 
     map.addLayer({
@@ -72,6 +72,23 @@ export function renderMap(container, width, height, mapTilerApiKey) {
       },
       filter: ["==", "$type", "Point"],
     });
+
+    // map.addLayer({
+    //   id: 'developments-labels',
+    //   type: 'symbol',
+    //   source: 'developments',
+    //   layout: {
+    //     'text-field': ['get', 'development_key'],
+    //     'text-size': 12,
+    //     'text-offset': [0, 1.2],
+    //     'text-anchor': 'top'
+    //   },
+    //   paint: {
+    //     'text-color': '#333',
+    //     'text-halo-color': '#fff',
+    //     'text-halo-width': 1
+    //   }
+    // });
 
     // map.addLayer({
     //   "id": "Point labels",
