@@ -34,9 +34,9 @@ export function renderMap(container, width, height, mapTilerApiKey) {
 }
 
 function addDevelopmentData(map, firstSymbolId) {
-  map.addSource("development-activity-source", {
+  map.addSource("street-addresses-source", {
     type: "geojson",
-    data: "https://clived.live/development-activity-monitor.geojson",
+    data: "https://clived.live/street-addresses.geojson",
     cluster: true,
     clusterMaxZoom: 14,
     clusterRadius: 50,
@@ -44,9 +44,9 @@ function addDevelopmentData(map, firstSymbolId) {
 
   map.addLayer(
     {
-      id: "development-activity-layer",
+      id: "street-addresses-layer",
       type: "circle",
-      source: "development-activity-source",
+      source: "street-addresses-source",
       paint: {
         "circle-radius": [
           "interpolate",
@@ -77,7 +77,7 @@ function addDevelopmentData(map, firstSymbolId) {
     {
       id: "clusters",
       type: "circle",
-      source: "development-activity-source",
+      source: "street-addresses-source",
       filter: ["has", "point_count"],
       paint: {
         "circle-color": [
@@ -99,7 +99,7 @@ function addDevelopmentData(map, firstSymbolId) {
     {
       id: "cluster-count",
       type: "symbol",
-      source: "development-activity-source",
+      source: "street-addresses-source",
       filter: ["has", "point_count"],
       layout: {
         "text-field": "{point_count_abbreviated}",
