@@ -1,4 +1,4 @@
-import App from "../components/Heatmaps/App";
+import App from "../components/Play/App";
 import Image from "next/image";
 import logoImg from "./mapguru-small-logo.png";
 

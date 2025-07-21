@@ -5,13 +5,12 @@ import {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-export function renderMap(container, setZoom) {
+export function renderMap(container, setZoom, mapTilerApiKey) {
   const map = new MapLibre({
     container,
     zoom: 15.5,
     center: [144.96177471761524, -37.81467349847328],
-    style:
-      "https://api.maptiler.com/maps/backdrop/style.json?key=BgDl6LfLj7t7bRlYpA9b",
+    style: `https://api.maptiler.com/maps/backdrop/style.json?key=${mapTilerApiKey}`,
     pitch: 0,
     maxZoom: 18,
     maxPitch: 85,
