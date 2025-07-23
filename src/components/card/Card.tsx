@@ -24,8 +24,11 @@ export const Card = ({ img, title, description, id }: MapMetadata) => {
 			<div className="card-body">
 				<h2 className="card-title">{title}</h2>
 				<p>{description}</p>
+				<p>
+					<Link href={`/map/${id}`}>view</Link>
+				</p>
 				<div className="card-actions justify-end">
-					<Suspense fallback={<Link href={`/map/${id}`}></Link>}>
+					<Suspense fallback={<Link href={`/map/${id}`}>view</Link>}>
 						<RenderMapButton id={id} />
 					</Suspense>
 				</div>

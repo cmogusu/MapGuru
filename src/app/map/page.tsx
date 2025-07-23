@@ -1,15 +1,12 @@
 import { Page } from "@/components/Page";
-import { Body } from "@/components/Body";
+import { MapPage } from "@/components/MapPage";
 import { MapModal } from "@/components/MapModal";
 
-export default async function Map(props) {
-	const params = await props.params;
-	console.log(params);
-
+export default async function Map() {
 	return (
 		<Page>
 			<MapModal />
-			<Body category={"cat"} />
+			<MapPage mapId={"mapId"} />
 		</Page>
 	);
 }

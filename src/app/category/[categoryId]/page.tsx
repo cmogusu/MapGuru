@@ -9,8 +9,6 @@ type Props = {
 export default async function Category({ params }: Props) {
 	const { categoryId } = await params;
 
-	console.log(categoryId);
-
 	return (
 		<Page>
 			<MapModal />
