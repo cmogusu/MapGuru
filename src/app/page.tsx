@@ -2,7 +2,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { MapRenderContextProvider } from "@/context";
 import { MapList } from "@/components/mapList";
-import { RenderMap } from "@/components/renderMap";
+import { MapModal } from "@/components/MapModal";
 
 export default async function Home() {
 	// const params = await props.params;
@@ -14,7 +14,7 @@ export default async function Home() {
 			<Header />
 			<main>
 				<MapRenderContextProvider>
-					<RenderMap />
+					<MapModal />
 					<MapList />
 				</MapRenderContextProvider>
 			</main>

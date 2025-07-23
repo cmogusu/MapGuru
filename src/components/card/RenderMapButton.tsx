@@ -8,11 +8,11 @@ type Props = {
 };
 
 export function RenderMapButton({ id }: Props) {
-	const { setMapComponent } = useMapRenderContext();
+	const { setActiveMapId } = useMapRenderContext();
 
 	const handleClick = useCallback(() => {
-		setMapComponent(id);
-	}, [id, setMapComponent]);
+		setActiveMapId(id);
+	}, [id, setActiveMapId]);
 
 	return (
 		<button className="btn btn-primary" onClick={handleClick} type="button">

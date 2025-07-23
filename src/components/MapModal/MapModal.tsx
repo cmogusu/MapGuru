@@ -4,22 +4,25 @@ import { useMapRenderContext } from "@/context";
 import { Suspense, useCallback, useMemo } from "react";
 import { mapMetadataList } from "@/mapMetadataList";
 import { Modal } from "./Modal";
+import { useUpdateSearchParams } from "./useUpdateSearchParams";
 import type { MapMetadata } from "@/types";
 
-export const RenderMap = () => {
-	const { mapComponent, setMapComponent } = useMapRenderContext();
+export const MapModal = () => {
+	const { activeMapId, setActiveMapId } = useMapRenderContext();
+
+	useUpdateSearchParams();
 
 	const metadata = useMemo(
 		() =>
 			mapMetadataList.find(
-				(metadata: MapMetadata) => metadata.id === mapComponent,
+				(metadata: MapMetadata) => metadata.id === activeMapId,
 			),
-		[mapComponent],
+		[activeMapId],
 	);
 
 	const onClose = useCallback(() => {
-		setMapComponent("");
-	}, [setMapComponent]);
+		setActiveMapId("");
+	}, [setActiveMapId]);
 
 	if (!metadata) {
 		return null;
@@ -32,7 +35,7 @@ export const RenderMap = () => {
 			<Modal
 				title="title"
 				description="description"
-				mapComponent={mapComponent}
+				activeMapId={activeMapId}
 				onClose={onClose}
 			>
 				<MapComponent />

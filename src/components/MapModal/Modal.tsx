@@ -3,14 +3,14 @@ import { useCallback, useEffect, useRef } from "react";
 
 type Props = Pick<MapMetadata, "title" | "description"> & {
 	children: React.ReactElement;
-	mapComponent: string;
+	activeMapId: string;
 	onClose: () => void;
 };
 
 export const Modal = ({
 	title,
 	description,
-	mapComponent,
+	activeMapId,
 	onClose,
 	children,
 }: Props) => {
@@ -22,11 +22,11 @@ export const Modal = ({
 	}, [onClose]);
 
 	useEffect(() => {
-		mapComponent && dialogRef.current?.showModal();
+		activeMapId && dialogRef.current?.showModal();
 		return () => {
 			dialogRef.current?.close();
 		};
-	}, [mapComponent]);
+	}, [activeMapId]);
 
 	return (
 		<dialog className="modal" ref={dialogRef}>

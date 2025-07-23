@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { renderMap } from "./renderMap";
+import { MapModal } from "./MapModal";
 import "./style.css";
 
 export default function HeatMap({ mapTilerApiKey }) {
@@ -14,7 +14,7 @@ export default function HeatMap({ mapTilerApiKey }) {
 			return;
 		}
 
-		renderMap(divRef.current, setZoom, mapTilerApiKey);
+		MapModal(divRef.current, setZoom, mapTilerApiKey);
 	}, []);
 
 	useEffect(() => {

@@ -1,16 +1,24 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState } from "react";
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useMemo,
+	useState,
+} from "react";
 import type { ReactNode } from "react";
 
+const ACTIVE_MAP_ID_KEY = "ACTIVE_MAP_ID";
+
 type MapRenderContextType = {
-	setMapComponent: (val: string) => void;
-	mapComponent: string;
+	setActiveMapId: (val: string) => void;
+	activeMapId: string;
 };
 
 const MapRenderContext = createContext<MapRenderContextType>({
-	setMapComponent: () => {},
-	mapComponent: "",
+	setActiveMapId: () => {},
+	activeMapId: "",
 });
 
 type Props = {
@@ -18,14 +26,20 @@ type Props = {
 };
 
 export const MapRenderContextProvider = (props: Props) => {
-	const [mapComponent, setMapComponent] = useState<string>("");
+	const storedActiveMapId = localStorage.getItem(ACTIVE_MAP_ID_KEY) || "";
+	const [activeMapId, setActiveMapId] = useState<string>(storedActiveMapId);
+
+	const setActiveMapIdWithStorage = useCallback((mapId: string) => {
+		localStorage.setItem(ACTIVE_MAP_ID_KEY, mapId);
+		setActiveMapId(mapId);
+	}, []);
 
 	const context = useMemo(
 		() => ({
-			setMapComponent,
-			mapComponent,
+			setActiveMapId: setActiveMapIdWithStorage,
+			activeMapId,
 		}),
-		[mapComponent],
+		[activeMapId, setActiveMapIdWithStorage],
 	);
 
 	return <MapRenderContext value={context}>{props.children}</MapRenderContext>;

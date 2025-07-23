@@ -5,7 +5,7 @@ import {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-export function renderMap(container, setZoom, mapTilerApiKey) {
+export function MapModal(container, setZoom, mapTilerApiKey) {
   const map = new MapLibre({
     container,
     zoom: 15.5,

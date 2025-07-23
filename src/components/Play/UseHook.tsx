@@ -8,11 +8,11 @@ type Props = {
 };
 
 export function UseHook({ component }: Props) {
-	const { setMapComponent } = useMapRenderContext();
+	const { setActiveMapId } = useMapRenderContext();
 
 	useEffect(() => {
-		setMapComponent(component);
-	}, [setMapComponent, component]);
+		setActiveMapId(component);
+	}, [setActiveMapId, component]);
 
 	return null;
 }
