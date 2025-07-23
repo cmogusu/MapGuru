@@ -25,7 +25,7 @@ type Props = {
 	children: ReactNode;
 };
 
-export const MapRenderContextProvider = (props: Props) => {
+const MapRenderContextProviderLocal = (props: Props) => {
 	const storedActiveMapId = localStorage.getItem(ACTIVE_MAP_ID_KEY) || "";
 	const [activeMapId, setActiveMapId] = useState<string>(storedActiveMapId);
 
@@ -46,3 +46,15 @@ export const MapRenderContextProvider = (props: Props) => {
 };
 
 export const useMapRenderContext = () => useContext(MapRenderContext);
+
+export const MapRenderContextProvider = (props: Props) => {
+	if (typeof window === "undefined") {
+		return props.children;
+	}
+
+	return (
+		<MapRenderContextProviderLocal>
+			{props.children}
+		</MapRenderContextProviderLocal>
+	);
+};

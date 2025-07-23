@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import type { MapMetadata } from "@/types";
 import type { ComponentType } from "react";
-import { categories } from "@/constants";
 
 export * from "./App";
 
@@ -17,10 +16,5 @@ export const metadata: MapMetadata = {
 		"Map that loads and effeciently renders approximately 30MB of data containing more than 100k records.",
 	id: "heatmaps",
 	component: HeatMapsImport,
-	categories: [
-		categories.maplibre,
-		categories.massiveData,
-		categories.clusters,
-		categories.heatmap,
-	],
+	categories: ["maplibre", "massiveData", "clusters", "heatmap", "dog"],
 };

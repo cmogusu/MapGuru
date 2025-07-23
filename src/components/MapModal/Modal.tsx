@@ -43,6 +43,8 @@ export const Modal = ({
 				<h3 className="font-bold text-lg">{title}</h3>
 				<p className="py-4">{description}</p>
 				{children}
+
+				{/* Close when close button is clicked */}
 				<div className="modal-action">
 					<form method="dialog">
 						<button className="btn" type="button" onClick={handleClose}>
@@ -51,6 +53,13 @@ export const Modal = ({
 					</form>
 				</div>
 			</div>
+
+			{/* Close when backdrop is clicked */}
+			<form method="dialog" className="modal-backdrop">
+				<button type="button" onClick={handleClose}>
+					close
+				</button>
+			</form>
 		</dialog>
 	);
 };

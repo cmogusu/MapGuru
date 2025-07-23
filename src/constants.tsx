@@ -1,21 +1,79 @@
+import type { Categories } from "./types";
+
 export const DefaultImage: { src: string; alt: string } = {
 	src: "/img/default-swimmania-image.jpg",
 	alt: "Default Swimmania image",
 };
 
-export const categories = {
-	maplibre: "Maplibre",
-	mapbox: "Mapbox",
-	osm: "Open street maps",
-	google: "Google maps",
-	mapTiler: "Map tiler",
-	leaflet: "Leaflet",
-	tomtom: "TomTom",
-	styled: "Styled",
-	heatmap: "Heatmap",
-	clusters: "Clusters",
-	directions: "Directions",
-	massiveData: "Massive data",
-	historic: "Historic",
-	animated: "Animated",
+export const categories: Categories = {
+	maplibre: {
+		id: "maplibre",
+		title: "Maplibre",
+		description: "Maps built with MapLibre",
+	},
+	mapbox: {
+		id: "mapbox",
+		title: "Mapbox",
+		description: "Maps built with Mapbox",
+	},
+	osm: {
+		id: "osm",
+		title: "Open street maps",
+		description: "Maps built with Open Street Maps",
+	},
+	google: {
+		id: "google",
+		title: "Google maps",
+		description: "Maps built with Google Maps",
+	},
+	mapTiler: {
+		id: "mapTiler",
+		title: "Map tiler",
+		description: "Maps built with MapTiler",
+	},
+	leaflet: {
+		id: "leaflet",
+		title: "Leaflet",
+		description: "Maps built with Leaflet",
+	},
+	tomtom: {
+		id: "tomtom",
+		title: "TomTom",
+		description: "Maps built with TomTom",
+	},
+	styled: {
+		id: "styled",
+		title: "Styled",
+		description: "Styled maps",
+	},
+	heatmap: {
+		id: "heatmap",
+		title: "Heatmap",
+		description: "Heatmap visualizations",
+	},
+	clusters: {
+		id: "clusters",
+		title: "Clusters",
+		description: "Clustered map data",
+	},
+	directions: {
+		id: "directions",
+		title: "Directions",
+		description: "Maps with directions",
+	},
+	massiveData: {
+		id: "massiveData",
+		title: "Massive data",
+		description: "Maps with massive data sets",
+	},
+	historic: {
+		id: "historic",
+		title: "Historic",
+		description: "Historic maps",
+	},
+	animated: {
+		id: "animated",
+		title: "Animated",
+		description: "Animated maps",
+	},
 };
