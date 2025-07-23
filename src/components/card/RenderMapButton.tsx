@@ -15,8 +15,12 @@ export function RenderMapButton({ id }: Props) {
 	}, [id, setActiveMapId]);
 
 	return (
-		<button className="btn btn-primary" onClick={handleClick} type="button">
-			view
+		<button
+			className="btn btn-sm btn-outline"
+			onClick={handleClick}
+			type="button"
+		>
+			Quick view
 		</button>
 	);
 }

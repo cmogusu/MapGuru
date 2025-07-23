@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 export const Header = () => (
-	<header className="bg-primary mb-10">
-		<div className="md:container mx-auto">
+	<header className="bg-primary">
+		<div className="md:container mx-auto px-4">
 			<div className="navbar shadow-sm">
 				<div className="flex-1">
 					<a className="text-xl" href="/">

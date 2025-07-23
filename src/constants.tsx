@@ -1,5 +1,8 @@
 import type { Categories } from "./types";
 
+// Ratio of height to width ratio
+export const ImgHeightToWidthRatio = 666 / 1000;
+
 export const DefaultImage: { src: string; alt: string } = {
 	src: "/img/default-swimmania-image.jpg",
 	alt: "Default Swimmania image",

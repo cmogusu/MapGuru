@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 export const Footer = () => (
-	<footer className="bg-primary mt-10">
-		<div className="md:container mx-auto footer sm:footer-horizontal  text-base-content p-10">
+	<footer className="bg-primary">
+		<div className="md:container mx-auto footer sm:footer-horizontal text-base-content p-4">
 			<aside>
 				<Image
 					src="/img/mapguru-small-logo.png"

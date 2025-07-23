@@ -1,15 +1,23 @@
 import { Page } from "@/components/Page";
-import { Body } from "@/components/Body";
-import { MapModal } from "@/components/MapModal";
+import { CardList } from "@/components/CardList";
 
-export default async function Category(props) {
-	const params = await props.params;
-	console.log(params);
-
+export default async function Category() {
 	return (
 		<Page>
-			<MapModal />
-			<Body category={"cat"} />
+			<h1>Categories</h1>
+			<section className="mb-2">
+				<h2>Most popular</h2>
+				<div>
+					<CardList categoryId="popular" />
+				</div>
+			</section>
+
+			<section className="mb-2">
+				<h2>Interesting</h2>
+				<div>
+					<CardList categoryId="interesting" />
+				</div>
+			</section>
 		</Page>
 	);
 }

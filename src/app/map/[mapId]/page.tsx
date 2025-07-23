@@ -1,6 +1,5 @@
 import { Page } from "@/components/Page";
-import { MapBody } from "@/components/Body";
-import { MapModal } from "@/components/MapModal";
+import { MapPage } from "@/components/MapPage";
 
 type Props = {
 	params: Promise<{ mapId: string }>;
@@ -11,8 +10,7 @@ export default async function MapId({ params }: Props) {
 
 	return (
 		<Page>
-			<MapModal />
-			<MapBody mapId={mapId} />
+			<MapPage mapId={mapId} />
 		</Page>
 	);
 }

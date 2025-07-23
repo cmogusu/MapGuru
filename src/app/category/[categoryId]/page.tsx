@@ -1,6 +1,5 @@
 import { Page } from "@/components/Page";
-import { Body } from "@/components/Body";
-import { MapModal } from "@/components/MapModal";
+import { CardList } from "@/components/CardList";
 
 type Props = {
 	params: Promise<{ categoryId: string }>;
@@ -11,8 +10,7 @@ export default async function Category({ params }: Props) {
 
 	return (
 		<Page>
-			<MapModal />
-			<Body categoryId={categoryId} />
+			<CardList categoryId={categoryId} />
 		</Page>
 	);
 }

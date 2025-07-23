@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DefaultImage } from "@/constants";
+import { DefaultImage, ImgHeightToWidthRatio } from "@/constants";
 import { RenderMapButton } from "./RenderMapButton";
 import type { MapMetadata } from "@/types";
 import { Suspense } from "react";
@@ -11,24 +11,25 @@ export const Card = ({ img, title, description, id }: MapMetadata) => {
 		return "";
 	}
 
+	const pageLink = `/map/${id}`;
+
 	return (
-		<div className="card w-96 shadow-sm">
+		<div className="card w-full shadow-sm">
 			<figure>
 				<Image
 					src={img.src || DefaultImage.src}
 					alt={img.alt || description}
-					width={500}
-					height={300}
+					width={1024}
+					height={1024 * ImgHeightToWidthRatio}
 				/>
 			</figure>
 			<div className="card-body">
-				<h2 className="card-title">{title}</h2>
+				<Link href={pageLink}>
+					<h2 className="card-title">{title}</h2>
+				</Link>
 				<p>{description}</p>
-				<p>
-					<Link href={`/map/${id}`}>view</Link>
-				</p>
 				<div className="card-actions justify-end">
-					<Suspense fallback={<Link href={`/map/${id}`}>view</Link>}>
+					<Suspense fallback={<Link href={pageLink}>view</Link>}>
 						<RenderMapButton id={id} />
 					</Suspense>
 				</div>

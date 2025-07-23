@@ -1,12 +1,10 @@
 import { Page } from "@/components/Page";
-import { MapPage } from "@/components/MapPage";
-import { MapModal } from "@/components/MapModal";
+import { MapCardList } from "@/components/CardList";
 
-export default async function Map() {
+export default async function MapPage() {
 	return (
 		<Page>
-			<MapModal />
-			<MapPage mapId={"mapId"} />
+			<MapCardList />
 		</Page>
 	);
 }

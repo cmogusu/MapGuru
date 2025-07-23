@@ -1,15 +1,10 @@
 import { Page } from "@/components/Page";
-import { Body } from "@/components/Body";
-import { MapModal } from "@/components/MapModal";
+import { CardList } from "@/components/CardList";
 
-export default async function Home(props) {
-	const params = await props.params;
-	console.log(params);
-
+export default async function Home() {
 	return (
 		<Page>
-			<MapModal />
-			<Body category={"cat"} />
+			<CardList />
 		</Page>
 	);
 }
