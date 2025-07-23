@@ -49,7 +49,6 @@ const onSourceLoad = (map, targetSourceId) =>
   new Promise((resolve) => {
     const loadingCheck = (event) => {
       const { isSourceLoaded, sourceId } = event;
-      console.log({ isSourceLoaded, sourceId, targetSourceId });
       if (isSourceLoaded && sourceId === targetSourceId) {
         map.off("sourcedata", loadingCheck);
         resolve();
