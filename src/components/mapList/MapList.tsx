@@ -1,21 +1,13 @@
 import { Card } from "@/components/card";
 import type { MapMetadata } from "@/types";
-
-const metadata: MapMetadata = {
-	img: {
-		src: "/img/default-mapguru-image.jpg",
-		alt: "loading large volumes of data",
-	},
-	title: "Efficient rendering of large volumes of data",
-	description:
-		"Map that loads and effeciently renders approximately 30MB of data containing more than 100k records.",
-	component: "heatmaps",
-};
+import { mapMetadataList } from "@/mapMetadataList";
 
 export const MapList = () => {
 	return (
 		<div>
-			<Card {...metadata} />
+			{mapMetadataList.map((metadata: MapMetadata) => (
+				<Card key={metadata.id} {...metadata} />
+			))}
 		</div>
 	);
 };

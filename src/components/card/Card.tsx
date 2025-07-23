@@ -3,14 +3,14 @@ import { DefaultImage } from "@/constants";
 import { RenderMapButton } from "./RenderMapButton";
 import type { MapMetadata } from "@/types";
 
-export const Card = ({ img, title, description, component }: MapMetadata) => {
+export const Card = ({ img, title, description, id }: MapMetadata) => {
 	if (!title || !description) {
 		console.error("title or description is not set");
 		return "";
 	}
 
 	return (
-		<div className="card bg-base-100 w-96 shadow-sm">
+		<div className="card w-96 shadow-sm">
 			<figure>
 				<Image
 					src={img.src || DefaultImage.src}
@@ -23,7 +23,7 @@ export const Card = ({ img, title, description, component }: MapMetadata) => {
 				<h2 className="card-title">{title}</h2>
 				<p>{description}</p>
 				<div className="card-actions justify-end">
-					<RenderMapButton component={component} />
+					<RenderMapButton id={id} />
 				</div>
 			</div>
 		</div>

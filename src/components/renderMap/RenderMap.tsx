@@ -1,35 +1,42 @@
 "use client";
 
 import { useMapRenderContext } from "@/context";
-import { Suspense, useCallback } from "react";
-import { listOfMaps } from "@/listOfMaps";
+import { Suspense, useCallback, useMemo } from "react";
+import { mapMetadataList } from "@/mapMetadataList";
 import { Modal } from "./Modal";
+import type { MapMetadata } from "@/types";
 
 export const RenderMap = () => {
 	const { mapComponent, setMapComponent } = useMapRenderContext();
-	const HeatMapsImport =
-		mapComponent && mapComponent in listOfMaps
-			? listOfMaps[mapComponent as keyof typeof listOfMaps]
-			: undefined;
+
+	const metadata = useMemo(
+		() =>
+			mapMetadataList.find(
+				(metadata: MapMetadata) => metadata.id === mapComponent,
+			),
+		[mapComponent],
+	);
 
 	const onClose = useCallback(() => {
 		setMapComponent("");
 	}, [setMapComponent]);
 
+	if (!metadata) {
+		return null;
+	}
+
+	const MapComponent = metadata.component;
+
 	return (
-		<div>
-			{!!HeatMapsImport && (
-				<Suspense fallback="loading">
-					<Modal
-						title="title"
-						description="description"
-						mapComponent={mapComponent}
-						onClose={onClose}
-					>
-						<HeatMapsImport />
-					</Modal>
-				</Suspense>
-			)}
-		</div>
+		<Suspense fallback="loading">
+			<Modal
+				title="title"
+				description="description"
+				mapComponent={mapComponent}
+				onClose={onClose}
+			>
+				<MapComponent />
+			</Modal>
+		</Suspense>
 	);
 };

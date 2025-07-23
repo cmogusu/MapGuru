@@ -1,3 +1,5 @@
+import type { ComponentType } from "react";
+
 export type MapMetadata = {
 	img: {
 		src: string;
@@ -5,5 +7,6 @@ export type MapMetadata = {
 	};
 	title: string;
 	description: string;
-	component: string;
+	id: string;
+	component: ComponentType<unknown>;
 };

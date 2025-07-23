@@ -30,7 +30,7 @@ export const Modal = ({
 
 	return (
 		<dialog className="modal" ref={dialogRef}>
-			<div className="modal-box modal-top w-11/12 max-w-5xl">
+			<div className="modal-box bg-white modal-top w-11/12 max-w-5xl">
 				<form method="dialog">
 					<button
 						className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
