@@ -5,22 +5,21 @@ import type { ReactNode } from "react";
 import { withServerSafetyHoc } from "./withServerSafetyHoc";
 
 type ApiKeysContextType = {
-	maptilerApiKey: string;
 	mapboxApiKey: string;
+	maptilerApiKey: string;
+	tomtomApiKey: string;
 };
 
 const initialKeys = {
-	maptilerApiKey: "",
 	mapboxApiKey: "",
+	maptilerApiKey: "",
+	tomtomApiKey: "",
 };
 
 const ApiKeysContext = createContext<ApiKeysContextType>(initialKeys);
 
 type Props = {
-	getApiKeys: () => Promise<{
-		mapboxApiKey: string;
-		maptilerApiKey: string;
-	}>;
+	getApiKeys: () => Promise<unknown>;
 	children: ReactNode;
 };
 
@@ -32,7 +31,7 @@ const ApiContextProviderLocal = ({ children, getApiKeys }: Props) => {
 			return;
 		}
 		getApiKeys().then((newKeys) => {
-			setKeys(newKeys);
+			setKeys(newKeys as ApiKeysContextType);
 		});
 	}, [getApiKeys]);
 

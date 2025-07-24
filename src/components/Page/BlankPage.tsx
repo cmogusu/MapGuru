@@ -2,7 +2,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { MapModal } from "@/components/MapModal";
 import { ApiContextProvider, ModalRenderContextProvider } from "@/context";
-import { getApiKeys } from "@/serverFunctions";
+import { getApiKeys } from "@/server";
 import type { ReactNode } from "react";
 import "./style.css";
 
