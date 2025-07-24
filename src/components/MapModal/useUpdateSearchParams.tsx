@@ -1,14 +1,14 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMapRenderContext } from "@/context";
+import { useModalRenderContext } from "@/context";
 import { useEffect } from "react";
 import { addQueryString, removeQueryString } from "@/utilities";
 
 export const useUpdateSearchParams = () => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const { activeMapId } = useMapRenderContext();
+	const { activeMapId } = useModalRenderContext();
 	const searchParams = useSearchParams();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Only need to update search params when modal is toggled

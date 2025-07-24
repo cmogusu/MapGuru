@@ -1,6 +1,6 @@
 "use client";
 
-import { useMapRenderContext } from "@/context";
+import { useModalRenderContext } from "@/context";
 import { Suspense, useCallback, useMemo } from "react";
 import { mapMetadataList } from "@/mapMetadataList";
 import { Modal } from "./Modal";
@@ -8,7 +8,7 @@ import { useUpdateSearchParams } from "./useUpdateSearchParams";
 import type { MapMetadata } from "@/types";
 
 export const MapModal = () => {
-	const { activeMapId, setActiveMapId } = useMapRenderContext();
+	const { activeMapId, setActiveMapId } = useModalRenderContext();
 
 	useUpdateSearchParams();
 

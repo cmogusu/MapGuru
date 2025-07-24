@@ -1,9 +1,11 @@
-import { MapRenderContextProvider } from "@/context";
+import { ModalRenderContextProvider } from "@/context";
 
 export const ServerWrapper = (props) => {
 	if (typeof window === "undefined") {
 		return props.children;
 	}
 
-	return <MapRenderContextProvider>{props.children}</MapRenderContextProvider>;
+	return (
+		<ModalRenderContextProvider>{props.children}</ModalRenderContextProvider>
+	);
 };

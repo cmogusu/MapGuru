@@ -1,5 +1,7 @@
+"use client";
+
 import { useEffect, useState, useRef } from "react";
-import { MapModal } from "./MapModal";
+import { renderMap } from "./renderMap";
 import "./style.css";
 
 export default function HeatMap({ mapTilerApiKey }) {
@@ -14,8 +16,8 @@ export default function HeatMap({ mapTilerApiKey }) {
 			return;
 		}
 
-		MapModal(divRef.current, setZoom, mapTilerApiKey);
-	}, []);
+		renderMap(divRef.current, setZoom, mapTilerApiKey);
+	}, [mapTilerApiKey]);
 
 	useEffect(() => {
 		setIsLoading(true);

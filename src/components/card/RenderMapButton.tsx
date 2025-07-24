@@ -1,6 +1,6 @@
 "use client";
 
-import { useMapRenderContext } from "@/context";
+import { useModalRenderContext } from "@/context";
 import { useCallback } from "react";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function RenderMapButton({ id }: Props) {
-	const { setActiveMapId } = useMapRenderContext();
+	const { setActiveMapId } = useModalRenderContext();
 
 	const handleClick = useCallback(() => {
 		setActiveMapId(id);

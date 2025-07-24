@@ -8,6 +8,7 @@ import {
 	useState,
 } from "react";
 import type { ReactNode } from "react";
+import { withServerSafetyHoc } from "./withServerSafetyHoc";
 
 const ACTIVE_MAP_ID_KEY = "ACTIVE_MAP_ID";
 
@@ -25,7 +26,7 @@ type Props = {
 	children: ReactNode;
 };
 
-const MapRenderContextProviderLocal = (props: Props) => {
+const ModalRenderContextProviderLocal = (props: Props) => {
 	const storedActiveMapId = localStorage.getItem(ACTIVE_MAP_ID_KEY) || "";
 	const [activeMapId, setActiveMapId] = useState<string>(storedActiveMapId);
 
@@ -45,16 +46,8 @@ const MapRenderContextProviderLocal = (props: Props) => {
 	return <MapRenderContext value={context}>{props.children}</MapRenderContext>;
 };
 
-export const useMapRenderContext = () => useContext(MapRenderContext);
+export const useModalRenderContext = () => useContext(MapRenderContext);
 
-export const MapRenderContextProvider = (props: Props) => {
-	if (typeof window === "undefined") {
-		return props.children;
-	}
-
-	return (
-		<MapRenderContextProviderLocal>
-			{props.children}
-		</MapRenderContextProviderLocal>
-	);
-};
+export const ModalRenderContextProvider = withServerSafetyHoc(
+	ModalRenderContextProviderLocal,
+);

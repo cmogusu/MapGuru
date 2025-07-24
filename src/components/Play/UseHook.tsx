@@ -1,6 +1,6 @@
 "use client";
 
-import { useMapRenderContext } from "@/context";
+import { useModalRenderContext } from "@/context";
 import { useEffect } from "react";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function UseHook({ component }: Props) {
-	const { setActiveMapId } = useMapRenderContext();
+	const { setActiveMapId } = useModalRenderContext();
 
 	useEffect(() => {
 		setActiveMapId(component);

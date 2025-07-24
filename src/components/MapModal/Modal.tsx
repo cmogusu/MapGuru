@@ -1,5 +1,6 @@
 import type { MapMetadata } from "@/types";
 import { useCallback, useEffect, useRef } from "react";
+import "./style.css";
 
 type Props = Pick<MapMetadata, "title" | "description"> & {
 	children: React.ReactElement;
@@ -30,7 +31,7 @@ export const Modal = ({
 
 	return (
 		<dialog className="modal" ref={dialogRef}>
-			<div className="modal-box bg-white modal-top w-11/12 max-w-5xl">
+			<div className="modal-box bg-white modal-top md:container max-h-screen-80">
 				<form method="dialog">
 					<button
 						className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -40,14 +41,21 @@ export const Modal = ({
 						✕
 					</button>
 				</form>
-				<h3 className="font-bold text-lg">{title}</h3>
-				<p className="py-4">{description}</p>
-				{children}
+
+				<div>
+					<h3 className="font-bold text-lg">{title}</h3>
+					<p className="py-4">{description}</p>
+					{children}
+				</div>
 
 				{/* Close when close button is clicked */}
-				<div className="modal-action">
+				<div className="modal-action ml-auto">
 					<form method="dialog">
-						<button className="btn" type="button" onClick={handleClose}>
+						<button
+							className="btn btn-outline"
+							type="button"
+							onClick={handleClose}
+						>
 							Close
 						</button>
 					</form>
