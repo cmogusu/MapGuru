@@ -5,6 +5,7 @@ import HeatMap from "./HeatMap";
 export default function App() {
 	return (
 		<div>
+			<HeatMap />
 			<div className="container">
 				<p className="lead">
 					This map is loading and rendering{" "}
@@ -20,7 +21,6 @@ export default function App() {
 					</a>
 				</p>
 			</div>
-			<HeatMap />
 		</div>
 	);
 }

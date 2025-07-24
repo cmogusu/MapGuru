@@ -32,12 +32,7 @@ export const MapModal = () => {
 
 	return (
 		<Suspense fallback="loading">
-			<Modal
-				title="title"
-				description="description"
-				activeMapId={activeMapId}
-				onClose={onClose}
-			>
+			<Modal activeMapId={activeMapId} onClose={onClose}>
 				<MapComponent />
 			</Modal>
 		</Suspense>

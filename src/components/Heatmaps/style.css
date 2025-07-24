@@ -12,7 +12,7 @@
 .map-container .zoom-level {
 	position: absolute;
 	right: 10px;
-	top: 10px;
+	top: 20px;
 	z-index: 99999;
 	font-weight: bold;
 	background: #fff;

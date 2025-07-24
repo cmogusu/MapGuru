@@ -27,18 +27,18 @@ export function renderMap(container, setZoom, mapTilerApiKey) {
     "top-left"
   );
 
-  map.on("load", () => {
-    const firstSymbolId = getFirstSymbol(map);
-    addDevelopmentData(map, firstSymbolId);
+  // map.on("load", () => {
+  //   const firstSymbolId = getFirstSymbol(map);
+  //   addDevelopmentData(map, firstSymbolId);
 
-    onSourceLoad(map, "street-addresses-source").then(() => {
-      setTimeout(() => {
-        map.zoomTo(7, { duration: 10000 });
-      }, 2000);
-    });
+  //   onSourceLoad(map, "street-addresses-source").then(() => {
+  //     setTimeout(() => {
+  //       map.zoomTo(7, { duration: 10000 });
+  //     }, 2000);
+  //   });
 
-    updateZoom(map, setZoom);
-  });
+  //   updateZoom(map, setZoom);
+  // });
 
   map.on("zoom", () => {
     updateZoom(map, setZoom);
