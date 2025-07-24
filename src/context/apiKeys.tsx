@@ -1,47 +1,46 @@
 "use client";
 
-import {
-	createContext,
-	useCallback,
-	useContext,
-	useMemo,
-	useState,
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { withServerSafetyHoc } from "./withServerSafetyHoc";
 
-type MapRenderContextType = {
+type ApiKeysContextType = {
 	maptilerApiKey: string;
 	mapboxApiKey: string;
 };
 
-const MapRenderContext = createContext<MapRenderContextType>({
+const initialKeys = {
 	maptilerApiKey: "",
 	mapboxApiKey: "",
-});
+};
+
+const ApiKeysContext = createContext<ApiKeysContextType>(initialKeys);
 
 type Props = {
-	env: {
-		MAPTILER_API_KEY: string;
-		MAPBOX_ACCESS_TOKEN: string;
-	};
+	getApiKeys: () => Promise<{
+		mapboxApiKey: string;
+		maptilerApiKey: string;
+	}>;
 	children: ReactNode;
 };
 
-const ApiContextProviderLocal = ({ children, env }: Props) => {
-	const { MAPTILER_API_KEY, MAPBOX_ACCESS_TOKEN } = env;
+const ApiContextProviderLocal = ({ children, getApiKeys }: Props) => {
+	const [keys, setKeys] = useState<ApiKeysContextType>(initialKeys);
 
-	const context = useMemo(
-		() => ({
-			maptilerApiKey: MAPTILER_API_KEY,
-			mapboxApiKey: MAPBOX_ACCESS_TOKEN,
-		}),
-		[MAPTILER_API_KEY, MAPBOX_ACCESS_TOKEN],
-	);
+	useEffect(() => {
+		if (!getApiKeys) {
+			return;
+		}
+		getApiKeys().then((newKeys) => {
+			setKeys(newKeys);
+		});
+	}, [getApiKeys]);
 
-	return <MapRenderContext value={context}>{children}</MapRenderContext>;
+	const context = useMemo(() => keys, [keys]);
+
+	return <ApiKeysContext value={context}>{children}</ApiKeysContext>;
 };
 
-export const useModalRenderContext = () => useContext(MapRenderContext);
+export const useApiKeyContext = () => useContext(ApiKeysContext);
 
 export const ApiContextProvider = withServerSafetyHoc(ApiContextProviderLocal);

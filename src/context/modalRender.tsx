@@ -27,11 +27,11 @@ type Props = {
 };
 
 const ModalRenderContextProviderLocal = (props: Props) => {
-	const storedActiveMapId = localStorage.getItem(ACTIVE_MAP_ID_KEY) || "";
+	const storedActiveMapId = sessionStorage.getItem(ACTIVE_MAP_ID_KEY) || "";
 	const [activeMapId, setActiveMapId] = useState<string>(storedActiveMapId);
 
 	const setActiveMapIdWithStorage = useCallback((mapId: string) => {
-		localStorage.setItem(ACTIVE_MAP_ID_KEY, mapId);
+		sessionStorage.setItem(ACTIVE_MAP_ID_KEY, mapId);
 		setActiveMapId(mapId);
 	}, []);
 

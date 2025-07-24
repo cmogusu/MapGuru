@@ -1,5 +1,7 @@
 "use client";
 
+import HeatMap from "./HeatMap";
+
 export default function App() {
 	return (
 		<div>
@@ -18,7 +20,7 @@ export default function App() {
 					</a>
 				</p>
 			</div>
-			{/* <DynamicApp {...props} /> */}
+			<HeatMap />
 		</div>
 	);
 }

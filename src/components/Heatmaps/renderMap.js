@@ -5,7 +5,7 @@ import {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-export function MapModal(container, setZoom, mapTilerApiKey) {
+export function renderMap(container, setZoom, mapTilerApiKey) {
   const map = new MapLibre({
     container,
     zoom: 15.5,
@@ -66,8 +66,8 @@ function updateZoom(map, setZoom) {
 function addDevelopmentData(map, firstSymbolId) {
   map.addSource("street-addresses-source", {
     type: "geojson",
-    data: "https://clived.live/street-addresses.geojson",
-    // data: "/development-activity-monitor.geojson",
+    // data: "https://clived.live/street-addresses.geojson",
+    data: "/development-activity-monitor.geojson",
     cluster: true,
     clusterMaxZoom: 14,
     clusterRadius: 50,

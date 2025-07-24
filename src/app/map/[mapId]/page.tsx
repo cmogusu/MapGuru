@@ -1,4 +1,4 @@
-import { Page } from "@/components/Page";
+import { SingleColumnPage } from "@/components/Page";
 import { MapPage } from "@/components/MapPage";
 
 type Props = {
@@ -9,8 +9,8 @@ export default async function MapId({ params }: Props) {
 	const { mapId } = await params;
 
 	return (
-		<Page>
+		<SingleColumnPage>
 			<MapPage mapId={mapId} />
-		</Page>
+		</SingleColumnPage>
 	);
 }
