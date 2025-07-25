@@ -1,14 +1,15 @@
 "use client";
 
-import {
+import mapbox, {
 	FullscreenControl,
-	Map as MapLibre,
+	Map as MapBox,
 	NavigationControl,
-} from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
+} from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useRef } from "react";
 import { MapContainer } from "@/components/MapContainer";
 import { DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM } from "@/constants";
+import { useApiKeyContext } from "@/context";
 import type { LngLat } from "@/types";
 import { logInfo } from "@/utilities";
 
@@ -16,28 +17,25 @@ type Props = {
 	styleUrl: string;
 };
 
-export function BaseMaplibreMap({ styleUrl }: Props) {
+export function BaseMapboxMap({ styleUrl }: Props) {
+	const { mapboxApiKey } = useApiKeyContext();
 	const divRef = useRef<HTMLDivElement>(null);
-	const mapRef = useRef<MapLibre>(null);
+	const mapRef = useRef<MapBox>(null);
 
 	useEffect(() => {
-		if (
-			!styleUrl ||
-			!divRef.current ||
-			divRef.current.querySelector("canvas")
-		) {
+		if (!divRef.current || divRef.current.querySelector("canvas")) {
 			return;
 		}
 
 		logInfo("Creating maplibre map instance");
-		mapRef.current = renderMap(divRef.current, styleUrl);
+		mapRef.current = renderMap(divRef.current, styleUrl, mapboxApiKey);
 		return () => {
 			if (mapRef.current) {
 				logInfo("Removing maplibre map map");
 				mapRef.current.remove();
 			}
 		};
-	}, [styleUrl]);
+	}, [mapboxApiKey, styleUrl]);
 
 	return (
 		<MapContainer>
@@ -49,10 +47,12 @@ export function BaseMaplibreMap({ styleUrl }: Props) {
 export function renderMap(
 	container: HTMLDivElement,
 	styleUrl: string,
+	mapboxApiKey: string,
 	zoom: number = DEFAULT_MAP_ZOOM,
 	center: LngLat = DEFAULT_MAP_CENTER,
 ) {
-	const map = new MapLibre({
+	mapbox.accessToken = mapboxApiKey;
+	const map = new MapBox({
 		container,
 		zoom,
 		center,
@@ -68,7 +68,6 @@ export function renderMap(
 			showCompass: true,
 			showZoom: true,
 			visualizePitch: true,
-			visualizeRoll: true,
 		}),
 		"top-left",
 	);

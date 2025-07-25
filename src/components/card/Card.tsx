@@ -13,6 +13,7 @@ export const Card = ({ img, title, description, id }: MapMetadata) => {
 	}
 
 	const pageLink = `/map/${id}`;
+	const screenshotLink = `/screenshot/${id}`;
 
 	return (
 		<div className="card w-full shadow-sm">
@@ -29,6 +30,9 @@ export const Card = ({ img, title, description, id }: MapMetadata) => {
 					<h2 className="card-title">{title}</h2>
 				</Link>
 				<p>{description}</p>
+				<p>
+					<Link href={screenshotLink}>screenshot</Link>
+				</p>
 				<div className="card-actions justify-end">
 					<Suspense fallback={<Link href={pageLink}>view</Link>}>
 						<RenderMapButton id={id} />

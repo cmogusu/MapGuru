@@ -1,14 +1,12 @@
-import { LngLat } from "maplibre-gl";
-import type { Categories } from "./types";
+import type { Categories, LngLat } from "./types";
 
 export const API_KEY_PLACEHOLDER = "XXX-API-KEY-XXX";
 export const ImgHeightToWidthRatio = 666 / 1000;
 
-export const DEFAULT_MAP_ZOOM = 4.1;
-export const DEFAULT_MAP_CENTER: LngLat = new LngLat(
-	-77.007777135803,
-	39.6561791405168,
-);
+export const DEFAULT_MAP_ZOOM = 12.3;
+export const DEFAULT_MAP_CENTER: LngLat = [
+	-77.02802728158858, 38.886986812976716,
+];
 
 export const DefaultImage: { src: string; alt: string } = {
 	src: "/img/default-swimmania-image.jpg",

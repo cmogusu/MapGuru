@@ -6,6 +6,8 @@ export type Category = {
 	description: string;
 };
 
+export type LngLat = [number, number];
+
 export type Categories = { [k: string]: Category };
 
 export type MapMetadata = {
@@ -17,8 +19,6 @@ export type MapMetadata = {
 	title: string;
 	description: string;
 	categories: Array<keyof Categories>;
-	component: ComponentType<{ styleUrl?: string }>;
+	component: ComponentType<{ styleUrl: string }>;
 	styleUrl?: string;
 };
-
-export type LngLat = [number, number];

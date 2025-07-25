@@ -8,7 +8,7 @@ type Props = {
 	styleUrlWithoutKey: string;
 };
 
-export function BaseTomTomMap({ styleUrlWithoutKey }: Props) {
+export function BaseTomtomMap({ styleUrlWithoutKey }: Props) {
 	const { tomtomApiKey } = useApiKeyContext();
 	const styleUrl = styleUrlWithoutKey.replace(
 		API_KEY_PLACEHOLDER,

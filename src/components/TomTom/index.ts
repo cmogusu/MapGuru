@@ -1,13 +1,11 @@
-export * from "./TomTom";
-
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import type { MapMetadata } from "@/types";
 import { capitalize } from "@/utilities";
 import { styles } from "./mapStyles";
 
-const TomTom: ComponentType<{ styleUrl?: string }> = dynamic(
-	() => import("./TomTom"),
+const TomtomMap: ComponentType<{ styleUrl: string }> = dynamic(
+	() => import("./TomtomMap"),
 );
 
 const metadata: MapMetadata = {
@@ -19,7 +17,7 @@ const metadata: MapMetadata = {
 	title: "Efficient rendering of large volumes of data",
 	description:
 		"Map that loads and effeciently renders approximately 30MB of data containing more than 100k records.",
-	component: TomTom,
+	component: TomtomMap,
 	categories: ["tomtom"],
 };
 

@@ -34,7 +34,6 @@ export const MapListScreenshot = ({ mapId, moveFileToImgFolder }: Props) => {
 							type="button"
 							href={prevMapLink}
 							prefetch={false}
-							replace
 						>
 							prev
 						</Link>
@@ -50,7 +49,6 @@ export const MapListScreenshot = ({ mapId, moveFileToImgFolder }: Props) => {
 							type="button"
 							href={nextMapLink}
 							prefetch={false}
-							replace
 						>
 							next
 						</Link>
