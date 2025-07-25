@@ -1,12 +1,9 @@
 import dynamic from "next/dynamic";
-import type { ComponentType } from "react";
 import type { MapMetadata } from "@/types";
 
 export * from "./App";
 
-const HeatMapsImport: ComponentType<unknown> = dynamic(() => import("./App"));
-
-const metadata: MapMetadata = {
+const metadata = {
 	id: "heatmaps",
 	img: {
 		src: "/img/default-mapguru-image.jpg",
@@ -15,8 +12,17 @@ const metadata: MapMetadata = {
 	title: "Efficient rendering of large volumes of data",
 	description:
 		"Map that loads and effeciently renders approximately 30MB of data containing more than 100k records.",
-	component: HeatMapsImport,
 	categories: ["maplibre", "massiveData", "clusters", "heatmap", "dog"],
 };
 
-export const heatmapMetadata: MapMetadata[] = [metadata];
+export const heatmapMetadata: MapMetadata[] = [
+	{
+		url: "./App",
+	},
+].map(({ url }) => ({
+	...metadata,
+	component: dynamic(() => import(url)),
+}));
+// export const heatmapMetadata: MapMetadata[] = [metadata];
+
+export const heatcow = "moo";

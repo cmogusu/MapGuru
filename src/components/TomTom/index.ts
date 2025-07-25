@@ -3,8 +3,12 @@ export * from "./TomTom";
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import type { MapMetadata } from "@/types";
+import { capitalize } from "@/utilities";
+import { styles } from "./mapStyles";
 
-const TomTom: ComponentType<unknown> = dynamic(() => import("./TomTom"));
+const TomTom: ComponentType<{ styleUrl?: string }> = dynamic(
+	() => import("./TomTom"),
+);
 
 const metadata: MapMetadata = {
 	id: "tomtom",
@@ -19,4 +23,21 @@ const metadata: MapMetadata = {
 	categories: ["tomtom"],
 };
 
-export const tomtomMetadata: MapMetadata[] = [metadata];
+export const tomtomMetadata: MapMetadata[] = styles.map((style) => {
+	const id = style.name.replaceAll("_", "-");
+	const title = capitalize(
+		style.name.replaceAll("_", " ").replaceAll("-", " "),
+	);
+	const img = {
+		src: `/img/${id}.jpeg`,
+		alt: title,
+	};
+
+	return {
+		...metadata,
+		id,
+		img,
+		title,
+		styleUrl: style.url,
+	};
+});

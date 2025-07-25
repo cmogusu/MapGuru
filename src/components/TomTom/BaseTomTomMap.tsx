@@ -1,13 +1,12 @@
 "use client";
 
 import { BaseMaplibreMap } from "@/components/MapLibre";
+import { API_KEY_PLACEHOLDER } from "@/constants";
 import { useApiKeyContext } from "@/context";
 
 type Props = {
 	styleUrlWithoutKey: string;
 };
-
-export const API_KEY_PLACEHOLDER = "XXX-API-KEY-XXX";
 
 export function BaseTomTomMap({ styleUrlWithoutKey }: Props) {
 	const { tomtomApiKey } = useApiKeyContext();

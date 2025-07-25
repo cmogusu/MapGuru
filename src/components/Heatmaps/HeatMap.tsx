@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { useApiKeyContext } from "@/context";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ImgHeightToWidthRatio } from "@/constants";
+import { useApiKeyContext } from "@/context";
 import { renderMap } from "./renderMap";
 import "./style.css";
 
@@ -42,9 +42,9 @@ export default function HeatMap() {
 	}, []);
 
 	return (
-		<div ref={divRef} className="w-full bg-red-900">
+		<div ref={divRef} className="w-full ">
 			<div
-				className="bg-red-900"
+				className="bg-gray-200"
 				style={{ width: `${width}px`, height: `${height}px` }}
 			>
 				<HeatMapLocal />

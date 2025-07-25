@@ -1,78 +1,85 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import Link from "next/link";
+import { useMemo } from "react";
 import { ScreenCapture } from "@/components/ScreenCapture";
 import { mapMetadataList } from "@/mapMetadataList";
 import type { MapMetadata } from "@/types";
 
 type Props = {
+	mapId: string;
 	moveFileToImgFolder: (v: string) => void;
 };
 
-export const MapListScreenshot = ({ moveFileToImgFolder }: Props) => {
-	const [index, setIndex] = useState(0);
+export const MapListScreenshot = ({ mapId, moveFileToImgFolder }: Props) => {
+	const index = useGetStartIndex(mapId);
 	const [prevMetadata, currentMetadata, nextMetadata] =
 		getActiveMetadata(index);
-
-	const handlePrev = useCallback(() => {
-		setIndex((v) => v - 1);
-	}, []);
-
-	const handleNext = useCallback(() => {
-		setIndex((v) => v + 1);
-	}, []);
 
 	if (!currentMetadata || !currentMetadata.component) {
 		return null;
 	}
 
-	// const MapComponent = currentMetadata.component;
+	const MapComponent = currentMetadata.component;
+	const prevMapLink = getMapLink(prevMetadata);
+	const nextMapLink = getMapLink(nextMetadata);
+
 	return (
 		<div>
-			<div>
-				<button
-					className="btn btn-sm btn-outline"
-					type="button"
-					disabled={!prevMetadata}
-					onClick={handlePrev}
-				>
-					move
-				</button>
-			</div>
 			<div className="flex content-center justify-between w-full mb-4">
-				<button
-					className="btn btn-sm btn-outline"
-					type="button"
-					disabled={!prevMetadata}
-					onClick={handlePrev}
-				>
-					prev
-				</button>
+				<div>
+					{prevMapLink && (
+						<Link
+							className="btn btn-sm btn-outline "
+							type="button"
+							href={prevMapLink}
+							prefetch={false}
+							replace
+						>
+							prev
+						</Link>
+					)}
+				</div>
 				<div>
 					<p>{currentMetadata.title}</p>
 				</div>
-				<button
-					className="btn btn-sm btn-outline"
-					type="button"
-					disabled={!nextMetadata}
-					onClick={handleNext}
-				>
-					next
-				</button>
+				<div>
+					{nextMapLink && (
+						<Link
+							className="btn btn-sm btn-outline"
+							type="button"
+							href={nextMapLink}
+							prefetch={false}
+							replace
+						>
+							next
+						</Link>
+					)}
+				</div>
 			</div>
 			<ScreenCapture
 				imageFileName={currentMetadata.id}
 				moveFileToImgFolder={moveFileToImgFolder}
 			>
-				<img src="/img/sci-fi.avif" alt="cow" />
-				{/* <MapComponent /> */}
+				<MapComponent styleUrl={currentMetadata.styleUrl} />
 			</ScreenCapture>
 		</div>
 	);
 };
+
+const getMapLink = (metadata: MapMetadata) =>
+	metadata ? `/screenshot/${metadata?.id}` : "";
 
 const getActiveMetadata = (index: number): MapMetadata[] => [
 	mapMetadataList[index - 1],
 	mapMetadataList[index],
 	mapMetadataList[index + 1],
 ];
+
+const useGetStartIndex = (mapId: string): number =>
+	useMemo(() => {
+		const index = mapMetadataList.findIndex(
+			({ id }: MapMetadata) => id === mapId,
+		);
+		return index < 0 ? 0 : index;
+	}, [mapId]);

@@ -1,13 +1,14 @@
 import Image from "next/image";
-import { DefaultImage, ImgHeightToWidthRatio } from "@/constants";
-import { RenderMapButton } from "./RenderMapButton";
-import type { MapMetadata } from "@/types";
-import { Suspense } from "react";
 import Link from "next/link";
+import { Suspense } from "react";
+import { DefaultImage, ImgHeightToWidthRatio } from "@/constants";
+import type { MapMetadata } from "@/types";
+import { logError } from "@/utilities";
+import { RenderMapButton } from "./RenderMapButton";
 
 export const Card = ({ img, title, description, id }: MapMetadata) => {
 	if (!title || !description) {
-		console.error("title or description is not set");
+		logError("title or description is not set");
 		return "";
 	}
 

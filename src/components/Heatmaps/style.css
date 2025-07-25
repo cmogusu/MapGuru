@@ -11,6 +11,8 @@
 
 .map-container .zoom-level {
 	position: absolute;
+	max-width: 55px;
+	max-height: 18px;
 	right: 10px;
 	top: 20px;
 	z-index: 99999;

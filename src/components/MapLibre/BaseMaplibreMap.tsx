@@ -6,8 +6,11 @@ import {
 	NavigationControl,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+import type { LngLat } from "maplibre-gl";
 import { useEffect, useRef } from "react";
 import { MapContainer } from "@/components/MapContainer";
+import { DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM } from "@/constants";
+import { logInfo } from "@/utilities";
 
 type Props = {
 	styleUrl: string;
@@ -15,6 +18,7 @@ type Props = {
 
 export function BaseMaplibreMap({ styleUrl }: Props) {
 	const divRef = useRef<HTMLDivElement>(null);
+	const mapRef = useRef<MapLibre>(null);
 
 	useEffect(() => {
 		if (
@@ -25,7 +29,14 @@ export function BaseMaplibreMap({ styleUrl }: Props) {
 			return;
 		}
 
-		renderMap(divRef.current, styleUrl);
+		console.log("adddding map");
+		mapRef.current = renderMap(divRef.current, styleUrl);
+		return () => {
+			if (mapRef.current) {
+				console.log("remmmoving map");
+				mapRef.current.remove();
+			}
+		};
 	}, [styleUrl]);
 
 	return (
@@ -35,11 +46,16 @@ export function BaseMaplibreMap({ styleUrl }: Props) {
 	);
 }
 
-export function renderMap(container: HTMLDivElement, styleUrl: string) {
+export function renderMap(
+	container: HTMLDivElement,
+	styleUrl: string,
+	zoom: number = DEFAULT_MAP_ZOOM,
+	center: LngLat = DEFAULT_MAP_CENTER,
+) {
 	const map = new MapLibre({
 		container,
-		zoom: 15.5,
-		center: [144.96177471761524, -37.81467349847328],
+		zoom,
+		center,
 		style: styleUrl,
 		pitch: 0,
 		maxZoom: 18,
@@ -56,4 +72,14 @@ export function renderMap(container: HTMLDivElement, styleUrl: string) {
 		}),
 		"top-left",
 	);
+
+	map.on("click", (event) => {
+		logInfo(event.lngLat);
+	});
+
+	map.on("zoom", () => {
+		logInfo(map.getZoom());
+	});
+
+	return map;
 }

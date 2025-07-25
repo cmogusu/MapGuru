@@ -34,7 +34,7 @@ export function MapContainer({ children }: Props) {
 	return (
 		<div ref={divRef} className="w-full">
 			<div
-				className="bg-red-600 map-container w-full"
+				className="bg-gray-100 map-container w-full"
 				style={{ height: `${height}px` }}
 			>
 				{!!width && children}

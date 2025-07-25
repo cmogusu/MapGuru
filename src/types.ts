@@ -17,5 +17,8 @@ export type MapMetadata = {
 	title: string;
 	description: string;
 	categories: Array<keyof Categories>;
-	component: ComponentType<unknown>;
+	component: ComponentType<{ styleUrl?: string }>;
+	styleUrl?: string;
 };
+
+export type LngLat = [number, number];

@@ -1,4 +1,4 @@
-import { MapScreenshot } from "@/components/MapPage";
+import { MapListScreenshot } from "@/components/MapPage";
 import { BlankPage } from "@/components/Page";
 import { moveFileToImgFolder } from "@/server";
 
@@ -6,14 +6,14 @@ type Props = {
 	params: Promise<{ mapId: string }>;
 };
 
-export default async function MapId({ params }: Props) {
+export default async function ScreenshotPage({ params }: Props) {
 	const { mapId } = await params;
 
 	return (
 		<BlankPage>
 			<main className="md:container mx-auto w-full p-4">
 				<div className="w-full">
-					<MapScreenshot
+					<MapListScreenshot
 						mapId={mapId}
 						moveFileToImgFolder={moveFileToImgFolder}
 					/>

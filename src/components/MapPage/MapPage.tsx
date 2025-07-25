@@ -19,7 +19,7 @@ export const MapPage = ({ mapId }: Props) => {
 	const MapComponent = mapMetadata.component;
 	return (
 		<div>
-			<MapComponent />
+			<MapComponent styleUrl={mapMetadata.styleUrl} />
 		</div>
 	);
 };
