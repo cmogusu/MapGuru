@@ -28,7 +28,7 @@ export function MapContainer({ children }: Props) {
 		};
 	}, []);
 
-	const width = useSyncExternalStore(subscribe, getWidth);
+	const width = useSyncExternalStore(subscribe, getWidth, getServerSnapshot);
 	const height = Math.floor(width * ImgHeightToWidthRatio);
 
 	return (
@@ -42,3 +42,5 @@ export function MapContainer({ children }: Props) {
 		</div>
 	);
 }
+
+const getServerSnapshot = () => 0;

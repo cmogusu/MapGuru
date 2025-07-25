@@ -3,13 +3,13 @@
 import { ScreenCapture } from "@/components/ScreenCapture";
 import { mapMetadataList } from "@/mapMetadataList";
 import type { MapMetadata } from "@/types";
-import { metadata } from "../Heatmaps";
 
 type Props = {
 	mapId: string;
+	moveFileToImgFolder: (v: string) => void;
 };
 
-export const MapScreenshot = ({ mapId }: Props) => {
+export const MapScreenshot = ({ mapId, moveFileToImgFolder }: Props) => {
 	const mapMetadata = mapMetadataList.find(
 		({ id }: MapMetadata) => id === mapId,
 	);
@@ -20,9 +20,15 @@ export const MapScreenshot = ({ mapId }: Props) => {
 
 	const MapComponent = mapMetadata.component;
 	return (
-		<ScreenCapture imageFileName={metadata.id}>
-			{/* <img src="/img/sci-fi.avif" alt="cow" /> */}
-			<MapComponent />
-		</ScreenCapture>
+		<div>
+			<h2>{mapMetadata.id}</h2>
+
+			<ScreenCapture
+				imageFileName={mapMetadata.id}
+				moveFileToImgFolder={moveFileToImgFolder}
+			>
+				<MapComponent />
+			</ScreenCapture>
+		</div>
 	);
 };

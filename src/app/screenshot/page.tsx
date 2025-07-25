@@ -1,10 +1,15 @@
-import { Page } from "@/components/Page";
-import { CardList } from "@/components/CardList";
+import { MapListScreenshot } from "@/components/MapPage";
+import { BlankPage } from "@/components/Page";
+import { moveFileToImgFolder } from "@/server";
 
-export default async function MapPage() {
+export default async function ScreenshotPage() {
 	return (
-		<Page>
-			<CardList />
-		</Page>
+		<BlankPage>
+			<main className="md:container mx-auto w-full p-4">
+				<div className="w-full">
+					<MapListScreenshot moveFileToImgFolder={moveFileToImgFolder} />
+				</div>
+			</main>
+		</BlankPage>
 	);
 }

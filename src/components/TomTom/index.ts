@@ -1,11 +1,12 @@
 export * from "./TomTom";
+
 import dynamic from "next/dynamic";
-import type { MapMetadata } from "@/types";
 import type { ComponentType } from "react";
+import type { MapMetadata } from "@/types";
 
 const TomTom: ComponentType<unknown> = dynamic(() => import("./TomTom"));
 
-export const metadata: MapMetadata = {
+const metadata: MapMetadata = {
 	id: "tomtom",
 	img: {
 		src: "/img/default-mapguru-image.jpg",
@@ -17,3 +18,5 @@ export const metadata: MapMetadata = {
 	component: TomTom,
 	categories: ["tomtom"],
 };
+
+export const tomtomMetadata: MapMetadata[] = [metadata];

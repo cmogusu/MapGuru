@@ -11,36 +11,61 @@ type Dimensions = {
 
 type Props = {
 	imageFileName: string;
+	moveFileToImgFolder?: (v: string) => void;
 	children: ReactNode;
 };
 
-export const ScreenCapture = ({ imageFileName, children }: Props) => {
+export const ScreenCapture = ({
+	imageFileName,
+	moveFileToImgFolder,
+	children,
+}: Props) => {
 	const targetElementRef = useRef<HTMLDivElement>(null);
 	const utilityContainerRef = useRef<HTMLDivElement>(null);
 
+	const handleFileMove = useCallback(
+		(fileName: string) => {
+			if (moveFileToImgFolder && fileName) {
+				setTimeout(() => {
+					moveFileToImgFolder(fileName);
+				}, 2000);
+			}
+		},
+		[moveFileToImgFolder],
+	);
+
 	const handleCaptureScreen = useCallback(() => {
-		if (targetElementRef.current && utilityContainerRef.current) {
+		const targetEl = targetElementRef.current;
+		const utilityContainerEl = utilityContainerRef.current;
+
+		if (targetEl && utilityContainerEl) {
 			startCapture(
-				targetElementRef.current,
-				utilityContainerRef.current,
-				getDimensions(targetElementRef.current),
+				targetEl,
+				utilityContainerEl,
+				getDimensions(targetEl),
 				imageFileName,
+				handleFileMove,
 			);
 		}
-	}, [imageFileName]);
+	}, [imageFileName, handleFileMove]);
 
 	return (
 		<div>
-			<div className="w-full screen-capture-container" ref={targetElementRef}>
+			<div
+				className="w-full screen-capture-container mb-1"
+				ref={targetElementRef}
+			>
 				{children}
 			</div>
-			<button
-				type="button"
-				className="btn btn-outline ml-auto"
-				onClick={handleCaptureScreen}
-			>
-				Take screenshot
-			</button>
+			<div className="flex justify-center">
+				<button
+					type="button"
+					className="btn btn-sm btn-primary"
+					onClick={handleCaptureScreen}
+				>
+					Take screenshot
+				</button>
+			</div>
 			<div
 				className="screen-capture-utility-container bg-gray-200"
 				ref={utilityContainerRef}
@@ -54,9 +79,11 @@ async function startCapture(
 	container: HTMLDivElement,
 	dimensions: Dimensions,
 	imageFileName: string,
+	moveImageFile: (downloadFileName: string) => void,
 ) {
+	const downloadFileName = formatFileName(imageFileName);
 	const video = createVideoElement(container, dimensions);
-	const link = createLinkElement(container, imageFileName);
+	const link = createLinkElement(container, downloadFileName);
 	const canvas = createCanvasElement(dimensions);
 
 	improveColors(target);
@@ -73,6 +100,7 @@ async function startCapture(
 		capture(video, canvas, link);
 		stopCapture(video, stream);
 		restoreColors(target);
+		moveImageFile(downloadFileName);
 		video.remove();
 		link.remove();
 		target.style.filter = "none";
@@ -136,10 +164,7 @@ const createLinkElement = (
 	downloadFileName: string,
 ): HTMLAnchorElement => {
 	const link = document.createElement("a");
-	link.download = downloadFileName.includes(".jpeg")
-		? downloadFileName
-		: `${downloadFileName}.jpeg`;
-
+	link.download = downloadFileName;
 	container.append(link);
 	return link;
 };
@@ -175,3 +200,6 @@ const improveColors = (domElement: HTMLDivElement) => {
 const restoreColors = (domElement: HTMLDivElement) => {
 	domElement.style.filter = "none";
 };
+
+const formatFileName = (imageFileName: string) =>
+	imageFileName.includes(".jpeg") ? imageFileName : `${imageFileName}.jpeg`;

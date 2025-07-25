@@ -1,5 +1,8 @@
-import { metadata as heatmap } from "@/components/Heatmaps";
-import { metadata as tomtom } from "@/components/TomTom";
+import { tomtomMetadata } from "@/components/Heatmaps";
+import { heatmapMetadata } from "@/components/TomTom";
 import type { MapMetadata } from "./types";
 
-export const mapMetadataList: MapMetadata[] = [heatmap, tomtom];
+export const mapMetadataList: MapMetadata[] = [
+	...tomtomMetadata,
+	...heatmapMetadata,
+];
