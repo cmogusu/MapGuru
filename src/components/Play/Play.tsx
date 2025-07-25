@@ -1,35 +1,17 @@
 "use client";
 
-import { useRef } from "react";
 import { ScreenCapture } from "@/components/ScreenCapture";
+import { metadata } from "@/components/TomTom";
 
 export function Play() {
-	const divRef = useRef<HTMLDivElement>(null);
-	const imageFileName = "fun-download";
+	const TomTom = metadata.component;
+	const imageFileName = metadata.id;
 
 	return (
 		<div>
-			<div ref={divRef} style={divStyle}>
-				<img
-					src="/img/default-mapguru-image.jpg"
-					style={{ width: "400px", height: "auto" }}
-					alt="small logo placeholder"
-				/>
-			</div>
-			<ScreenCapture
-				targetElementRef={divRef}
-				width={400}
-				height={266}
-				imageFileName={imageFileName}
-			/>
+			<ScreenCapture imageFileName={imageFileName}>
+				<TomTom />
+			</ScreenCapture>
 		</div>
 	);
 }
-
-const divStyle = {
-	isolation: "isolate",
-	transformStyle: "flat",
-	backgroundColor: "red",
-	width: "400px",
-	height: "266px",
-};

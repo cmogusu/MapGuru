@@ -1,6 +1,5 @@
 "use client";
 
-import { MapContainer } from "@/components/MapContainer";
 import { BaseMaplibreMap } from "@/components/MapLibre";
 import { useApiKeyContext } from "@/context";
 
@@ -17,9 +16,5 @@ export function BaseTomTomMap({ styleUrlWithoutKey }: Props) {
 		tomtomApiKey,
 	);
 
-	return (
-		<MapContainer>
-			<BaseMaplibreMap styleUrl={styleUrl} />
-		</MapContainer>
-	);
+	return <BaseMaplibreMap styleUrl={styleUrl} />;
 }

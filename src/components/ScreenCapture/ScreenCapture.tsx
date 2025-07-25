@@ -1,69 +1,65 @@
 "use client";
 
-import { type RefObject, useCallback, useRef } from "react";
+import { type ReactNode, useCallback, useRef } from "react";
 import { logError } from "@/utilities";
+import "./style.css";
 
-type Props = {
-	targetElementRef: RefObject<HTMLDivElement>;
+type Dimensions = {
 	width: number;
 	height: number;
-	imageFileName: string;
 };
 
-export const ScreenCapture = ({
-	targetElementRef,
-	width,
-	height,
-	imageFileName,
-}: Props) => {
-	const linkContainerRef = useRef<HTMLDivElement>(null);
+type Props = {
+	imageFileName: string;
+	children: ReactNode;
+};
 
-	const handleStartCapture = useCallback(() => {
-		if (targetElementRef.current && linkContainerRef.current) {
+export const ScreenCapture = ({ imageFileName, children }: Props) => {
+	const targetElementRef = useRef<HTMLDivElement>(null);
+	const utilityContainerRef = useRef<HTMLDivElement>(null);
+
+	const handleCaptureScreen = useCallback(() => {
+		if (targetElementRef.current && utilityContainerRef.current) {
 			startCapture(
 				targetElementRef.current,
-				linkContainerRef.current,
-				width,
-				height,
+				utilityContainerRef.current,
+				getDimensions(targetElementRef.current),
 				imageFileName,
 			);
 		}
-	}, [targetElementRef.current, width, height, imageFileName]);
+	}, [imageFileName]);
 
 	return (
 		<div>
+			<div className="w-full screen-capture-container" ref={targetElementRef}>
+				{children}
+			</div>
 			<button
 				type="button"
-				className="btn btn-outline"
-				onClick={handleStartCapture}
+				className="btn btn-outline ml-auto"
+				onClick={handleCaptureScreen}
 			>
-				start
+				Take screenshot
 			</button>
-
-			<div ref={linkContainerRef} />
+			<div
+				className="screen-capture-utility-container bg-gray-200"
+				ref={utilityContainerRef}
+			/>
 		</div>
 	);
-};
-
-const displayMediaOptions = {
-	video: {
-		displaySurface: "window",
-	},
-	preferCurrentTab: true,
-	audio: false,
 };
 
 async function startCapture(
 	target: HTMLDivElement,
 	container: HTMLDivElement,
-	width: number,
-	height: number,
+	dimensions: Dimensions,
 	imageFileName: string,
 ) {
-	const video = createVideoElement(container, width, height);
+	const video = createVideoElement(container, dimensions);
 	const link = createLinkElement(container, imageFileName);
-	const canvas = createCanvasElement(width, height);
+	const canvas = createCanvasElement(dimensions);
 
+	improveColors(target);
 	const stream = await createVideoStream(target);
 	if (!stream) {
 		return;
@@ -71,11 +67,15 @@ async function startCapture(
 
 	video.srcObject = stream;
 
+	// Give time for video to load. Taking the screen shot immediately often gives
+	// blank images
 	setTimeout(() => {
 		capture(video, canvas, link);
 		stopCapture(video, stream);
+		restoreColors(target);
 		video.remove();
 		link.remove();
+		target.style.filter = "none";
 	}, 1000);
 }
 
@@ -104,9 +104,17 @@ function capture(
 		videoElem.clientHeight,
 	);
 
-	link.href = canvas.toDataURL("image/png");
+	link.href = canvas.toDataURL("image/jpeg", 0.8);
 	link.click();
 }
+
+const displayMediaOptions = {
+	video: {
+		displaySurface: "window",
+	},
+	preferCurrentTab: true,
+	audio: false,
+};
 
 const createVideoStream = async (target: HTMLDivElement) => {
 	try {
@@ -128,32 +136,42 @@ const createLinkElement = (
 	downloadFileName: string,
 ): HTMLAnchorElement => {
 	const link = document.createElement("a");
-	link.download = downloadFileName.includes(".png")
+	link.download = downloadFileName.includes(".jpeg")
 		? downloadFileName
-		: `${downloadFileName}.png`;
+		: `${downloadFileName}.jpeg`;
+
 	container.append(link);
 	return link;
 };
 
-const createCanvasElement = (
-	width: number,
-	height: number,
-): HTMLCanvasElement => {
+const createCanvasElement = (dimensions: Dimensions): HTMLCanvasElement => {
 	const canvas = document.createElement("canvas");
-	canvas.width = width;
-	canvas.height = height;
+	canvas.width = dimensions.width;
+	canvas.height = dimensions.height;
 	return canvas;
 };
 
 const createVideoElement = (
 	container: HTMLDivElement,
-	width: number,
-	height: number,
+	dimensions: Dimensions,
 ): HTMLVideoElement => {
 	const video = document.createElement("video");
-	video.width = width;
-	video.height = height;
+	video.style.width = `${dimensions.width}px`;
+	video.style.height = `${dimensions.height}px`;
 	video.autoplay = true;
 	container.append(video);
 	return video;
+};
+
+const getDimensions = (domElement: HTMLDivElement): Dimensions => {
+	const { width, height } = domElement.getBoundingClientRect();
+	return { width, height };
+};
+
+const improveColors = (domElement: HTMLDivElement) => {
+	domElement.style.filter = "saturate(1.5) contrast(1.2)";
+};
+
+const restoreColors = (domElement: HTMLDivElement) => {
+	domElement.style.filter = "none";
 };

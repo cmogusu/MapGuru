@@ -1,0 +1,9 @@
+.screen-capture-container {
+	isolation: isolate;
+	transform-style: flat;
+}
+
+.screen-capture-utility-container {
+	/* top: 9999px;
+	z-index: -1; */
+}

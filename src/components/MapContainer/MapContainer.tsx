@@ -1,16 +1,13 @@
 "use client";
 
-import { ImgHeightToWidthRatio } from "@/constants";
 import {
 	type ReactNode,
 	useCallback,
-	useLayoutEffect,
 	useRef,
-	useState,
 	useSyncExternalStore,
 } from "react";
+import { ImgHeightToWidthRatio } from "@/constants";
 import "./style.css";
-import { logError } from "@/utilities";
 
 type Props = {
 	children: ReactNode;
@@ -18,35 +15,18 @@ type Props = {
 
 export function MapContainer({ children }: Props) {
 	const divRef = useRef<HTMLDivElement>(null);
-	// const [width, setWidth] = useState(0);
-	// const height = Math.floor(width * ImgHeightToWidthRatio);
-
-	// const getAndUpdateWidth = useCallback(() => {
-	// 	if (!divRef.current) {
-	// 		logError("map component dom element not set");
-	// 		return;
-	// 	}
-	// 	const { width } = divRef.current.getBoundingClientRect();
-	// 	setWidth(width);
-	// }, [])
-
-	// const handleResize = useCallback(() => {
-	// 	const newWidth = getWidth(divRef.current)
-	// 	setWidth(newWidth)
-	// }, [])
-
 	const getWidth = useCallback(
 		(): number =>
 			divRef.current ? divRef.current.getBoundingClientRect().width : 0,
 		[],
 	);
 
-	const subscribe = useCallback(() => {
-		window.addEventListener("resize", getWidth);
+	const subscribe = useCallback((callback: () => void) => {
+		window.addEventListener("resize", callback);
 		return () => {
-			window.removeEventListener("resize", getWidth);
+			window.removeEventListener("resize", callback);
 		};
-	}, [getWidth]);
+	}, []);
 
 	const width = useSyncExternalStore(subscribe, getWidth);
 	const height = Math.floor(width * ImgHeightToWidthRatio);
@@ -54,8 +34,8 @@ export function MapContainer({ children }: Props) {
 	return (
 		<div ref={divRef} className="w-full">
 			<div
-				className="bg-red-900 map-container"
-				style={{ width: `${width}px`, height: `${height}px` }}
+				className="bg-red-600 map-container w-full"
+				style={{ height: `${height}px` }}
 			>
 				{!!width && children}
 			</div>
