@@ -26,7 +26,7 @@ export async function moveFileToImgFolder(fileName: string) {
 	await moveFile(oldImgPath, newImgPath);
 }
 
-async function moveFile(oldPath: string, newPath: string) {
+export async function moveFile(oldPath: string, newPath: string) {
 	try {
 		await fs.rename(oldPath, newPath);
 		logInfo(`File moved successfully from ${oldPath} to ${newPath}`);

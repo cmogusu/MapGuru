@@ -23,11 +23,24 @@ const metadata: MapMetadata = {
 	categories: ["tomtom"],
 };
 
-export const tomtomMetadata: MapMetadata[] = styles.map((style) => {
+type MapStyle = {
+	name: string;
+	url: string;
+};
+
+const getId = (style: MapStyle) => {
 	const id = style.name.replaceAll("_", "-");
-	const title = capitalize(
-		style.name.replaceAll("_", " ").replaceAll("-", " "),
-	);
+	return `tomtom-${id}`;
+};
+
+const getTitle = (style: MapStyle) => {
+	const title = style.name.replaceAll("_", " ").replaceAll("-", " ");
+	return capitalize(title);
+};
+
+export const tomtomMetadata: MapMetadata[] = styles.map((style) => {
+	const id = getId(style);
+	const title = getTitle(style);
 	const img = {
 		src: `/img/${id}.jpeg`,
 		alt: title,
