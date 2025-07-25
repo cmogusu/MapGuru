@@ -7,7 +7,7 @@
 		"buildStart": "npm run build && npm run start",
 		"build": "next build",
 		"start": "next start -p 3001",
-		"lint": "next lint"
+		"lint": "npx @biomejs/biome lint --write"
 	},
 	"dependencies": {
 		"@mapcomponents/react-maplibre": "^1.3.2",
