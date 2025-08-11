@@ -1,0 +1,22 @@
+name: 'mapguru'
+services:
+  postgis:
+    image: postgis/postgis
+    container_name: postgis
+    restart: always
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env
+    volumes:
+      - postqis:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8081
+
+volumes:
+  postqis:
+    name: mapguru-postqis-volume

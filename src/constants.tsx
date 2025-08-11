@@ -1,12 +1,13 @@
-import type { Categories, LngLat } from "./types";
+import type { Categories, LatLng, LngLat } from "./types";
 
 export const API_KEY_PLACEHOLDER = "XXX-API-KEY-XXX";
 export const ImgHeightToWidthRatio = 666 / 1000;
 
+const defaultLat = 38.886986812976716;
+const defaultLng = -77.02802728158858;
 export const DEFAULT_MAP_ZOOM = 12.3;
-export const DEFAULT_MAP_CENTER: LngLat = [
-	-77.02802728158858, 38.886986812976716,
-];
+export const DEFAULT_MAP_CENTER: LngLat = [defaultLng, defaultLat];
+export const DEFAULT_MAP_CENTER_LATLNG: LatLng = [defaultLat, defaultLng];
 
 export const DefaultImage: { src: string; alt: string } = {
 	src: "/img/default-swimmania-image.jpg",

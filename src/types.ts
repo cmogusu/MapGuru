@@ -8,6 +8,8 @@ export type Category = {
 
 export type LngLat = [number, number];
 
+export type LatLng = [number, number];
+
 export type Categories = { [k: string]: Category };
 
 export type MapMetadata = {
