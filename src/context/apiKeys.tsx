@@ -1,25 +1,31 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { withServerSafetyHoc } from "./withServerSafetyHoc";
 
-type ApiKeysContextType = {
+export interface ApiKeysContextType {
 	mapboxApiKey: string;
 	maptilerApiKey: string;
 	tomtomApiKey: string;
-};
+	azureApiKey: string;
+	areKeysSet: boolean;
+}
 
-const initialKeys = {
+type ApiKeys = Omit<ApiKeysContextType, "areKeysSet">;
+
+export const initialKeys = {
 	mapboxApiKey: "",
 	maptilerApiKey: "",
 	tomtomApiKey: "",
+	azureApiKey: "",
+	areKeysSet: false,
 };
 
 const ApiKeysContext = createContext<ApiKeysContextType>(initialKeys);
 
 type Props = {
-	getApiKeys: () => Promise<unknown>;
+	getApiKeys: () => Promise<ApiKeys>;
 	children: ReactNode;
 };
 
@@ -30,8 +36,12 @@ const ApiContextProviderLocal = ({ children, getApiKeys }: Props) => {
 		if (!getApiKeys) {
 			return;
 		}
-		getApiKeys().then((newKeys) => {
-			setKeys(newKeys as ApiKeysContextType);
+		getApiKeys().then((newKeys: ApiKeys) => {
+			const updatedKeys: ApiKeysContextType = {
+				...newKeys,
+				areKeysSet: true,
+			};
+			setKeys(updatedKeys);
 		});
 	}, [getApiKeys]);
 

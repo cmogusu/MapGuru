@@ -10,7 +10,7 @@ const MapboxMap: ComponentType<{ styleUrl: string }> = dynamic(
 	() => import("./MapboxMap"),
 );
 
-const metadata: MapMetadata = {
+const defaultMetadata: MapMetadata = {
 	id: "mapbox",
 	img: {
 		src: "/img/default-mapguru-image.jpg",
@@ -40,7 +40,7 @@ export const mapboxMetadata: MapMetadata[] = styles.map((style) => {
 	};
 
 	return {
-		...metadata,
+		...defaultMetadata,
 		id,
 		img,
 		title,
